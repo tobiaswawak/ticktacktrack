@@ -12,7 +12,7 @@
         border
       >
         <template #title>
-          Das ist ein Test
+          Das ist ein Test 
         </template>
       </v-card>
     </v-container>
