@@ -17,16 +17,9 @@
           fluid
           border
         >
-          <time-form />
-        </v-card>
-
-        <!-- Tabelle -->
-        <v-card
-          class="ma-5"
-          fluid
-          border
-        >
-          <saved-time-table />
+          <v-card-text>
+            test
+          </v-card-text>
         </v-card>
         <v-container />
       </v-card>
@@ -43,7 +36,5 @@
 </style>
 
 <script setup>
-import GenralLayout from "@/layout/GenralLayout.vue";
-import SavedTimeTable from "../components/savedTimeTable.vue";
-import TimeForm from "./timeForm.vue";
+import GenralLayout from "../layout/GenralLayout.vue";
 </script>

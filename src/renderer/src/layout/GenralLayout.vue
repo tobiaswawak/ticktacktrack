@@ -1,16 +1,34 @@
 <template>
   <v-app>
-    <v-app-bar
-      density="compact"
-      clipped-left
-      :elevation="1"
-    >
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-    </v-app-bar>
+    <!-- Navigation -->
     <v-navigation-drawer
-      clipped
-      v-model="drawer"
-    />
+      class="background"
+    >
+      <v-list>
+        <v-list-item
+          prepend-avatar="https://randomuser.me/api/portraits/men/86.jpg"
+          title="Tick Tack Track"
+          class="ma-5"
+        />
+
+        <v-list-item
+          prepend-icon="mdi-timer-plus-outline"
+          title="Zeit erfassen"
+          value="addTime"
+          href="/"
+          class="ma-5"
+        />
+
+        <v-list-item
+          prepend-icon="mdi-account-outline"
+          title="Mein Account"
+          value="account"
+          href="/account"
+          class="ma-5"
+        />
+      </v-list>
+    </v-navigation-drawer>
+
     <v-main>
       <slot />
     </v-main>
@@ -18,9 +36,14 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-
-let drawer = ref(true)
 
 
 </script>
+
+<style setup>
+html {
+  overflow-y: auto
+}
+
+
+</style>
