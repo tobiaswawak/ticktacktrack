@@ -5,18 +5,19 @@
       class="background"
     >
       <v-list>
-        <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/86.jpg"
-          title="Tick Tack Track"
-          class="ma-5"
-        />
+        <v-list-item>
+          <img
+            src="../images/Logo-blau-mitSchrift.png"
+            height="115px"
+          >
+        </v-list-item>
 
         <v-list-item
           prepend-icon="mdi-timer-plus-outline"
           title="Zeit erfassen"
           value="addTime"
           href="/"
-          class="ma-5"
+          class="ml-5"
         />
 
         <v-list-item
