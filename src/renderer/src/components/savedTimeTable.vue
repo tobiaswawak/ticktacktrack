@@ -53,6 +53,18 @@ let headerVariables = ref([
     sortable: false,
     title: "Endzeit"
   },
+  {
+    align: "begin",
+    key: "pause",
+    sortable: false,
+    title: "Pause"
+  },
+  {
+    align: "begin",
+    key: "workedTime",
+    sortable: false,
+    title: "Dauer"
+  },
 
   {
     align: "end",

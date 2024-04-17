@@ -13,6 +13,7 @@
           :max="maxDate"
           :rules="rules"
           required
+          placeholder="25/12/2024"
         />
       </v-row>
 
@@ -37,8 +38,8 @@
       <v-row no-gutters>
         <v-text-field
           v-model="pause"
-          label="Pause"
-          type="text"
+          label="Pause in min"
+          type="number"
           :rules="rules"
           required
         />
@@ -75,9 +76,14 @@ import {useSaveTimeStore} from "../stores/saveTimeStore.js";
 const saveTimeStore = useSaveTimeStore();
 const form = ref(null)
 let maxDate = ref("")
-let startTime = ref("")
-let endTime = ref("")
-let date = ref("")
+let startTime = ref("15:00")
+
+let endTime = ref("16:00")
+
+let today = new Date().toISOString().split("T")[0]
+let date = ref(today)
+
+let pause = ref("15")
 
 onMounted(() => {
   maxDate.value = getMaxDate()
@@ -93,13 +99,26 @@ const rules = [
 const saveTime = async () => {
 
   const valid = await form.value.validate();
-
-  console.log(valid)
+  console.log(startTime)
   if (valid.valid) {
+
+    const start = new Date("2000-01-01T" + startTime.value + ":00");
+    const end = new Date("2000-01-01T" + endTime.value + ":00");
+    const workedTimeMinutes = (end - start) / (1000 * 60);
+
+    // Ziehe die Pausenzeit ab
+    const pauseMinutes = parseInt(pause.value);
+    const totalWorkedTimeMinutes = workedTimeMinutes - pauseMinutes;
+
+    // Arbeitszeit in Stunden umrechnen
+    const totalWorkedTimeHours = totalWorkedTimeMinutes / 60;
+
     const input = {
       date: new Date(date.value).toLocaleString("de-DE", {  weekday: "long" }).substring(0,2) + ". "+ new Date(date.value).toLocaleDateString(),
       startTime: startTime.value,
-      endTime: endTime.value
+      endTime: endTime.value,
+      pause: pause.value + " min",
+      workedTime: totalWorkedTimeHours + "h"
     }
     saveTimeStore.timestore.push(input);
   }
