@@ -1,5 +1,5 @@
 <template>
-  <GenralLayout>
+  <GeneralLayout>
     <v-container
       class="fill-height"
       fluid
@@ -31,7 +31,7 @@
         <v-container />
       </v-card>
     </v-container>
-  </GenralLayout>
+  </GeneralLayout>
 </template>
 
 <style scoped>
@@ -43,7 +43,7 @@
 </style>
 
 <script setup>
-import GenralLayout from "@/layout/GenralLayout.vue";
+import GeneralLayout from "@/layout/GeneralLayout.vue";
 import SavedTimeTable from "../components/savedTimeTable.vue";
-import TimeForm from "./timeForm.vue";
+import TimeForm from "../components/timeForm.vue";
 </script>

@@ -3,7 +3,6 @@
 <template>
   <v-data-table
     :headers="headerVariables"
-
     :items="saveTimeStore.timestore"
     dense
     fixed-header

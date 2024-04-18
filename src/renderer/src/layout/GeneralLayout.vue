@@ -12,10 +12,18 @@
         />
 
         <v-list-item
+          prepend-icon="mdi-home"
+          title="Home"
+          value="addTime"
+          href="/home"
+          class="ma-5"
+        />
+
+        <v-list-item
           prepend-icon="mdi-timer-plus-outline"
           title="Zeit erfassen"
           value="addTime"
-          href="/"
+          href="/timeTrack"
           class="ma-5"
         />
 
