@@ -13,7 +13,6 @@
           :max="maxDate"
           :rules="rules"
           required
-          placeholder="25/12/2024"
         />
       </v-row>
 
