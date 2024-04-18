@@ -1,106 +1,110 @@
 <template>
   <v-card>
+    <v-card-title class="text-center font-weight-black headline mt-5 text-h5">
+      Zeit erfassen
+    </v-card-title>
     <v-form
-      @submit.prevent
+      @submit.prevent="saveTime"
       lazy-validation
       ref="form"
+      class="pa-5"
     >
-      <v-row no-gutters>
-        <v-text-field
-          v-model="date"
-          label="Datum"
-          type="date"
-          :max="maxDate"
-          :rules="rules"
-          required
-        />
+      <v-row>
+        <v-col cols="12">
+          <v-text-field
+            v-model="date"
+            label="Datum"
+            type="date"
+            :max="maxDate"
+            :rules="rules"
+            required
+          />
+        </v-col>
       </v-row>
 
-      <v-row no-gutters>
-        <v-text-field
-          v-model="startTime"
-          label="Startzeit"
-          type="time"
-          :rules="rules"
-          required
-        />
-
-        <v-text-field
-          v-model="endTime"
-          label="Endzeit"
-          type="time"
-          :rules="rules"
-          required
-        />
+      <v-row>
+        <v-col cols="6">
+          <v-text-field
+            v-model="startTime"
+            label="Startzeit"
+            type="time"
+            :rules="rules"
+            required
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-text-field
+            v-model="endTime"
+            label="Endzeit"
+            type="time"
+            :rules="rules"
+            required
+          />
+        </v-col>
       </v-row>
 
-      <v-row no-gutters>
-        <v-text-field
-          v-model="pause"
-          label="Pause in min"
-          type="number"
-          :rules="rules"
-          required
-        />
+      <v-row>
+        <v-col cols="12">
+          <v-text-field
+            v-model="pause"
+            label="Pause in min"
+            type="number"
+            :rules="rules"
+            required
+          />
+        </v-col>
       </v-row>
 
-      <v-col>
-        <v-btn
-          type="submit"
-          color="primary"
-          class="mr-3 mb-3 ml-2"
-          @click="saveTime"
-        >
-          Erfassen
-        </v-btn>
-
-        <v-btn
-          color="secondary mr-3 mb-3 ml-2"
-          type="reset"
-          variant="outlined"
-        >
-          zurücksetzen
-        </v-btn>
-      </v-col>
+      <v-row justify="center">
+        <v-col cols="auto">
+          <v-btn
+            type="submit"
+            color="primary"
+          >
+            Erfassen
+          </v-btn>
+        </v-col>
+        <v-col cols="auto">
+          <v-btn
+            type="reset"
+            color="secondary"
+            variant="outlined"
+          >
+            Zurücksetzen
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-form>
   </v-card>
 </template>
 
-<style scoped></style>
-
 <script setup>
-import {onMounted, ref} from "vue";
-import {useSaveTimeStore} from "../stores/saveTimeStore.js";
+import { onMounted, ref } from "vue";
+import { useSaveTimeStore } from "../stores/saveTimeStore.js";
 
 const saveTimeStore = useSaveTimeStore();
-const form = ref(null)
-let maxDate = ref("")
-let startTime = ref("15:00")
-
-let endTime = ref("16:00")
-
-let today = new Date().toISOString().split("T")[0]
-let date = ref(today)
-
-let pause = ref("15")
+const form = ref(null);
+const maxDate = ref("");
+const startTime = ref("15:00");
+const endTime = ref("16:00");
+const today = new Date().toISOString().split("T")[0];
+const date = ref(today);
+const pause = ref("15");
 
 onMounted(() => {
-  maxDate.value = getMaxDate()
+  maxDate.value = getMaxDate();
 });
 
 const rules = [
   value => {
-    if (value) return true
-    return "Bitte eintragen"
+    if (value) return true;
+    return "Bitte eintragen";
   },
-]
+];
 
 const saveTime = async () => {
-
   const valid = await form.value.validate();
-  console.log(startTime)
   if (valid.valid) {
-
     const start = new Date("2000-01-01T" + startTime.value + ":00");
     const end = new Date("2000-01-01T" + endTime.value + ":00");
     const workedTimeMinutes = (end - start) / (1000 * 60);
@@ -113,20 +117,40 @@ const saveTime = async () => {
     const totalWorkedTimeHours = totalWorkedTimeMinutes / 60;
 
     const input = {
-      date: new Date(date.value).toLocaleString("de-DE", {  weekday: "long" }).substring(0,2) + ". "+ new Date(date.value).toLocaleDateString(),
+      date: date.value,
       startTime: startTime.value,
       endTime: endTime.value,
       pause: pause.value + " min",
       workedTime: totalWorkedTimeHours + "h"
-    }
+    };
     saveTimeStore.timestore.push(input);
   }
-}
+};
 
 const getMaxDate = () => {
-  const currentDate= new Date();
+  const currentDate = new Date();
   currentDate.setDate(currentDate.getDate());
   return currentDate.toISOString().split("T")[0];
+};
+</script>
+
+
+
+<style scoped>
+v-form {
+  transition: all 0.3s ease;
 }
 
-</script>
+.headline {
+  letter-spacing: 1px;
+}
+
+.v-text-field {
+  color: black !important; /* this will override the existing property applied */
+}
+
+.v-field {
+
+}
+
+</style>

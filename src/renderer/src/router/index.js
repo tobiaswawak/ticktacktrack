@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from "vue-router"
-import timeTrack from "@/views/timeTrack.vue";
+import timeTrack from "../views/timeTrack.vue";
 import account from "../views/account.vue";
 import home from "../views/home.vue";
 
@@ -8,18 +8,24 @@ const router = createRouter({
   routes: [
     {
       path: "/timeTrack",
-      component: timeTrack
+      name: "timeTrack",
+      component: timeTrack,
     },
     {
       path: "/account",
       name: "account",
-      component: account
+      component: account,
     },
     {
       path: "/home",
       name: "home",
-      component: home
+      component: home,
+    },
+    {
+      path: "/",
+      redirect: { path: "/home" }, // redirect property
     }
+
   ]
 })
 export default router

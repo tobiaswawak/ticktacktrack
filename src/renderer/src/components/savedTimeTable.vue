@@ -1,13 +1,10 @@
-
-
 <template>
-  <v-data-table
+  <v-data-table-virtual
     :headers="headerVariables"
     :items="saveTimeStore.timestore"
     dense
     fixed-header
   >
-    <template #bottom />
     <template #item.action="{index}">
       <v-btn
         border
@@ -20,7 +17,12 @@
         </v-icon>
       </v-btn>
     </template>
-  </v-data-table>
+    <template #item.date="{item}">
+      <p>
+        {{ transformDate(item.date) }}
+      </p>
+    </template>
+  </v-data-table-virtual>
 </template>
 
 <style scoped>
@@ -30,6 +32,7 @@
 <script setup>
 import {ref} from "vue";
 import {useSaveTimeStore} from "../stores/saveTimeStore.js";
+
 const saveTimeStore = useSaveTimeStore();
 
 let headerVariables = ref([
@@ -37,7 +40,7 @@ let headerVariables = ref([
   {
     align: "begin",
     key: "date",
-    sortable: false,
+    sortable: true,
     title: "Datum"
   },
   {
@@ -74,7 +77,14 @@ let headerVariables = ref([
 ]);
 
 const deleteItem = (index) => {
-  saveTimeStore.timestore.splice(index,1);
+  saveTimeStore.timestore.splice(index, 1);
 };
+
+const transformDate = (date) => {
+
+  return new Date(date).toLocaleString("de-DE", {weekday: "long"})
+    .substring(0, 2) + ". " + new Date(date).toLocaleDateString()
+
+}
 
 </script>
