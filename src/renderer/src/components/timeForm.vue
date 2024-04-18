@@ -1,8 +1,5 @@
 <template>
   <v-card>
-    <v-card-title class="text-center font-weight-black headline mt-5 text-h5">
-      Zeit erfassen
-    </v-card-title>
     <v-form
       @submit.prevent="saveTime"
       lazy-validation
@@ -18,6 +15,8 @@
             :max="maxDate"
             :rules="rules"
             required
+            variant="outlined"
+            color="primary"
           />
         </v-col>
       </v-row>
@@ -30,6 +29,8 @@
             type="time"
             :rules="rules"
             required
+            variant="outlined"
+            color="primary"
           />
         </v-col>
         <v-col cols="6">
@@ -39,6 +40,8 @@
             type="time"
             :rules="rules"
             required
+            variant="outlined"
+            color="primary"
           />
         </v-col>
       </v-row>
@@ -51,6 +54,8 @@
             type="number"
             :rules="rules"
             required
+            variant="outlined"
+            color="primary"
           />
         </v-col>
       </v-row>
@@ -60,6 +65,7 @@
           <v-btn
             type="submit"
             color="primary"
+            prepend-icon="mdi-check"
           >
             Erfassen
           </v-btn>
@@ -69,8 +75,9 @@
             type="reset"
             color="secondary"
             variant="outlined"
+            prepend-icon="mdi-window-close"
           >
-            Zurücksetzen
+            Reset
           </v-btn>
         </v-col>
       </v-row>
@@ -85,15 +92,20 @@ import { useSaveTimeStore } from "../stores/saveTimeStore.js";
 const saveTimeStore = useSaveTimeStore();
 const form = ref(null);
 const maxDate = ref("");
-const startTime = ref("15:00");
-const endTime = ref("16:00");
+const startTime = ref("");
+
+var d = new Date();
+var n = d.getHours() + ":" + d.getMinutes();
+
+const endTime = ref(n);
 const today = new Date().toISOString().split("T")[0];
 const date = ref(today);
-const pause = ref("15");
+const pause = ref("");
 
 onMounted(() => {
   maxDate.value = getMaxDate();
 });
+
 
 const rules = [
   value => {
@@ -144,13 +156,4 @@ v-form {
 .headline {
   letter-spacing: 1px;
 }
-
-.v-text-field {
-  color: black !important; /* this will override the existing property applied */
-}
-
-.v-field {
-
-}
-
 </style>

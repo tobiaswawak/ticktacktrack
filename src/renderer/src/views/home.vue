@@ -10,7 +10,24 @@
         height="100%"
         fluid
         border
-      />
+      >
+        <v-card
+          class="ma-5"
+          fluid
+          border
+        >
+          <v-card-title class="text-h5 my-2">
+            🏠 Home
+          </v-card-title>
+        </v-card>
+        <v-card
+          class="ma-5"
+          fluid
+          border
+        >
+          <v-card-title>Hallo</v-card-title>
+        </v-card>
+      </v-card>
     </v-container>
   </GeneralLayout>
 </template>
@@ -22,9 +39,7 @@ import GeneralLayout from "../layout/GeneralLayout.vue";
 
 </script>
 <style scoped>
-.vc-container .vc-weekday-1, .vc-container .vc-weekday-7 {
-  color: #6366f1;
-}
+
 .border-round {
   border-radius: 10px;
 }

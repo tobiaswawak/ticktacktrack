@@ -11,30 +11,29 @@
         fluid
         border
       >
-        <!-- Formular -->
         <v-card
           class="ma-5"
           fluid
           border
         >
-          <v-card-text>
-            test
-          </v-card-text>
+          <v-card-title class="text-h5 my-2">
+            🧑🏼 Mein Account
+          </v-card-title>
         </v-card>
-        <v-container />
       </v-card>
     </v-container>
   </GeneralLayout>
 </template>
 
+
+<script setup>
+
+import GeneralLayout from "../layout/GeneralLayout.vue";
+
+</script>
 <style scoped>
 
 .border-round {
   border-radius: 10px;
 }
-
 </style>
-
-<script setup>
-import GeneralLayout from "../layout/GeneralLayout.vue";
-</script>

@@ -73,7 +73,8 @@ const selectItem = (name) => {
 <style scoped>
 
 .active-item {
-  background-color: lightgray;
+  background-color: #4271bf;
+  color: white;
 }
 
 .navigation-drawer {

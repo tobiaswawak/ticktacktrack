@@ -11,6 +11,16 @@
         fluid
         border
       >
+        <v-card
+          class="ma-5"
+          fluid
+          border
+        >
+          <v-card-title class="text-h5 my-2">
+            ⏰ Zeit erfassen
+          </v-card-title>
+        </v-card>
+
         <!-- Formular -->
         <v-card
           class="ma-5"

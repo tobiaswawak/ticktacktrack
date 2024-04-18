@@ -25,9 +25,6 @@
   </v-data-table-virtual>
 </template>
 
-<style scoped>
-
-</style>
 
 <script setup>
 import {ref} from "vue";
@@ -88,3 +85,8 @@ const transformDate = (date) => {
 }
 
 </script>
+
+
+<style scoped>
+
+</style>
