@@ -94,8 +94,8 @@ const form = ref(null);
 const maxDate = ref("");
 const startTime = ref("");
 
-var d = new Date();
-var n = d.getHours() + ":" + d.getMinutes();
+const d = new Date();
+const n = d.getHours() + ":" + d.getMinutes();
 
 const endTime = ref(n);
 const today = new Date().toISOString().split("T")[0];
@@ -153,7 +153,4 @@ v-form {
   transition: all 0.3s ease;
 }
 
-.headline {
-  letter-spacing: 1px;
-}
 </style>

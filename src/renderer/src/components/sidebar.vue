@@ -24,7 +24,7 @@
         value="addTime"
         class="my-5 rounded-lg"
         @click="selectItem('timeTrack')"
-        :variant="getVariant('timeTrack')"
+
         :class="{'active-item': selectedItem === 'timeTrack'}"
       />
 
@@ -50,12 +50,10 @@ const route = useRoute()
 
 onMounted(() => {
   selectedItem.value = route.name
-
 });
 
 const getVariant = (name) => {
   if(name===selectedItem.value){
-    console.log(selectedItem.value)
     return "";
   } else {
     return null
@@ -76,14 +74,5 @@ const selectItem = (name) => {
   background-color: #4271bf;
   color: white;
 }
-
-.navigation-drawer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 
 </style>
