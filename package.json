@@ -21,6 +21,8 @@
     "@babel/eslint-parser": "^7.22.10",
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "@jamescoyle/vue-icon": "^0.1.2",
+    "@mdi/js": "^7.4.47",
     "@popperjs/core": "^2.11.8",
     "electron-updater": "^6.1.7",
     "pinia": "^2.1.7",

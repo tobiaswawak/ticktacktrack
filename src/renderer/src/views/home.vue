@@ -25,7 +25,7 @@
           fluid
           border
         >
-          <v-card-title>Hallo</v-card-title>
+          <v-card-title>Hallo ich bins</v-card-title>
         </v-card>
       </v-card>
     </v-container>
