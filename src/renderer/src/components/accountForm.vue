@@ -71,7 +71,7 @@
       <v-col cols="12">
         <v-text-field
           label="E-Mail"
-          type="input"
+          type="email"
           required
           variant="outlined"
           color="primary"
