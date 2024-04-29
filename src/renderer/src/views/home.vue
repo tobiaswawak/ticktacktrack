@@ -26,12 +26,13 @@
             cols="12"
             sm="6"
           >
+            <!-- Woche -->
             <v-card
-              class="ml-5 mt-5"
+              class="ml-5"
               fluid
               border
             >
-              <time-circle />
+              <time-circle-week />
             </v-card>
           </v-col>
 
@@ -39,16 +40,47 @@
             cols="12"
             sm="6"
           >
-            <!-- Tabelle -->
+            <!-- Monat -->
             <v-card
-              class="mr-5 mt-5"
+              class="mr-5"
               fluid
               border
             >
-              <v-card-title>test2</v-card-title>
+              <time-circle-month />
             </v-card>
           </v-col>
         </v-row>
+        <v-row justify="center">
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <!-- Woche -->
+            <v-card
+              class="ml-5"
+              fluid
+              border
+            >
+              <current-week />
+            </v-card>
+          </v-col>
+
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <!-- Monat -->
+            <v-card
+              class="mr-5"
+              fluid
+              border
+            >
+              <v-card-text>test</v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+
+
         <v-container />
       </v-card>
     </v-container>
@@ -58,7 +90,9 @@
 <script setup>
 
 import GeneralLayout from "../layout/GeneralLayout.vue";
-import TimeCircle from "../components/timeCircle.vue";
+import TimeCircleMonth from "../components/timeCircleMonth.vue";
+import TimeCircleWeek from "../components/timeCircleWeek.vue";
+import CurrentWeek from "../components/currentWeek.vue";
 
 </script>
 <style scoped>

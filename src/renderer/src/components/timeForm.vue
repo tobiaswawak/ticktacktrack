@@ -13,7 +13,7 @@
             label="Datum"
             type="date"
             :max="maxDate"
-            :rules="rules"
+            :rules="[...rules, checkDuplicateEntry]"
             required
             variant="outlined"
             color="primary"
@@ -86,9 +86,8 @@
 </template>
 
 <script setup>
-
-import { onMounted, ref } from "vue";
-import { useSaveTimeStore } from "../stores/saveTimeStore.js";
+import {onMounted, ref} from "vue";
+import {useSaveTimeStore} from "../stores/saveTimeStore.js";
 
 const saveTimeStore = useSaveTimeStore();
 const form = ref(null);
@@ -113,7 +112,6 @@ const rules = [
     return "Bitte eintragen";
   },
   value => {
-    // Validierung, dass die Startzeit vor der Endzeit liegt
     if (!startTime.value || !endTime.value) return true; // Skip validation if fields are empty
     const start = new Date("2000-01-01T" + startTime.value + ":00");
     const end = new Date("2000-01-01T" + endTime.value + ":00");
@@ -123,18 +121,17 @@ const rules = [
     return true;
   },
   value => {
-    // Validierung, dass die Endzeit minus Pause nicht gleich der Startzeit ist
-    // Diese Validierung wird für alle Felder durchgeführt, daher keine spezifische Überprüfung erforderlich
     const start = new Date("2000-01-01T" + startTime.value + ":00");
     const end = new Date("2000-01-01T" + endTime.value + ":00");
     const pauseMinutes = parseInt(pause.value);
     const totalWorkedTimeMinutes = (end - start) / (1000 * 60) - pauseMinutes;
-    if (totalWorkedTimeMinutes <= 0) return "Die Dauer muss größer als 0 sein";
+    if (totalWorkedTimeMinutes <= 0) return "Die Arbeitszeit beträgt weniger als 0 min";
     return true;
   }
 ];
 
 const saveTime = async () => {
+  try {
   const valid = await form.value.validate();
   if (valid.valid) {
     const start = new Date("2000-01-01T" + startTime.value + ":00");
@@ -155,7 +152,16 @@ const saveTime = async () => {
       pause: pause.value + " min",
       workedTime: totalWorkedTimeHours.toFixed(2) + "h" // Dauer auf zwei Nachkommastellen begrenzen
     };
-    saveTimeStore.timestore.push(input);
+
+    const existingEntry = saveTimeStore.timestore.find(item => item.date === input.date);
+    if (existingEntry) {
+      form.value.setErrors({date: "Für dieses Datum wurde bereits ein Eintrag gemacht"});
+    } else {
+      saveTimeStore.timestore.push(input);
+    }
+  }
+} catch (error) {
+    window.alert("Für diesen Tag wurde bereits eine Zeit erfasst");
   }
 };
 
@@ -166,11 +172,8 @@ const getMaxDate = () => {
 };
 </script>
 
-
-
 <style scoped>
 v-form {
   transition: all 0.3s ease;
 }
-
 </style>
