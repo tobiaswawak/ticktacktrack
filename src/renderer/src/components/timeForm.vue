@@ -86,6 +86,7 @@
 </template>
 
 <script setup>
+
 import { onMounted, ref } from "vue";
 import { useSaveTimeStore } from "../stores/saveTimeStore.js";
 
@@ -106,12 +107,31 @@ onMounted(() => {
   maxDate.value = getMaxDate();
 });
 
-
 const rules = [
   value => {
     if (value) return true;
     return "Bitte eintragen";
   },
+  value => {
+    // Validierung, dass die Startzeit vor der Endzeit liegt
+    if (!startTime.value || !endTime.value) return true; // Skip validation if fields are empty
+    const start = new Date("2000-01-01T" + startTime.value + ":00");
+    const end = new Date("2000-01-01T" + endTime.value + ":00");
+    if (start >= end) {
+      return "Die Startzeit muss vor der Endzeit liegen";
+    }
+    return true;
+  },
+  value => {
+    // Validierung, dass die Endzeit minus Pause nicht gleich der Startzeit ist
+    // Diese Validierung wird für alle Felder durchgeführt, daher keine spezifische Überprüfung erforderlich
+    const start = new Date("2000-01-01T" + startTime.value + ":00");
+    const end = new Date("2000-01-01T" + endTime.value + ":00");
+    const pauseMinutes = parseInt(pause.value);
+    const totalWorkedTimeMinutes = (end - start) / (1000 * 60) - pauseMinutes;
+    if (totalWorkedTimeMinutes <= 0) return "Die Dauer muss größer als 0 sein";
+    return true;
+  }
 ];
 
 const saveTime = async () => {
@@ -133,7 +153,7 @@ const saveTime = async () => {
       startTime: startTime.value,
       endTime: endTime.value,
       pause: pause.value + " min",
-      workedTime: totalWorkedTimeHours + "h"
+      workedTime: totalWorkedTimeHours.toFixed(2) + "h" // Dauer auf zwei Nachkommastellen begrenzen
     };
     saveTimeStore.timestore.push(input);
   }

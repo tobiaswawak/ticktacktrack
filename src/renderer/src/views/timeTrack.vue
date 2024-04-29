@@ -30,6 +30,7 @@
           <time-form />
         </v-card>
 
+
         <!-- Tabelle -->
         <v-card
           class="ma-5"
@@ -56,4 +57,5 @@
 import GeneralLayout from "@/layout/GeneralLayout.vue";
 import SavedTimeTable from "../components/savedTimeTable.vue";
 import TimeForm from "../components/timeForm.vue";
+import FilterTable from "../components/filterTable.vue";
 </script>

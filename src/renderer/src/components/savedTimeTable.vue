@@ -1,9 +1,34 @@
 <template>
+  <v-container>
+    <v-row>
+      <v-col cols="6">
+        <v-select
+          v-model="selectedMonth"
+          :items="months"
+          label="Monat auswählen"
+          variant="outlined"
+          color="primary"
+        />
+      </v-col>
+      <v-col cols="6">
+        <v-select
+          v-model="selectedYear"
+          :items="years"
+          label="Jahr auswählen"
+          variant="outlined"
+          color="primary"
+          no-data-text="Es wurden noch keine Zeiten erfasst"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
+
   <v-data-table-virtual
     :headers="headerVariables"
-    :items="saveTimeStore.timestore"
+    :items="filteredItems"
     dense
     fixed-header
+    no-data-text="Es wurden noch keine Zeiten erfasst"
   >
     <template #item.action="{index}">
       <v-btn
@@ -27,7 +52,7 @@
 
 
 <script setup>
-import {ref} from "vue";
+import {computed, ref, watch} from "vue";
 import {useSaveTimeStore} from "../stores/saveTimeStore.js";
 
 const saveTimeStore = useSaveTimeStore();
@@ -78,12 +103,55 @@ const deleteItem = (index) => {
 };
 
 const transformDate = (date) => {
-
   return new Date(date).toLocaleString("de-DE", {weekday: "long"})
     .substring(0, 2) + ". " + new Date(date).toLocaleDateString()
-
 }
 
+const years = computed(() => {
+  const uniqueYears = Array.from(new Set(saveTimeStore.timestore.map(item => new Date(item.date).getFullYear())));
+  return uniqueYears.sort((a, b) => b - a);
+});
+const selectedYear = ref(null);
+
+const months = [
+  "Januar", "Februar", "März", "April", "Mai", "Juni",
+  "Juli", "August", "September", "Oktober", "November", "Dezember"
+];
+const selectedMonth = ref(null);
+
+const filteredItems = computed(() => {
+  let filtered = saveTimeStore.timestore;
+  if (selectedYear.value !== null) {
+    filtered = filtered.filter(item => new Date(item.date).getFullYear() === selectedYear.value);
+  }
+  if (selectedMonth.value !== null) {
+    const selectedMonthIndex = months.findIndex(month => month === selectedMonth.value) + 1;
+    filtered = filtered.filter(item => {
+      const itemDate = new Date(item.date);
+      return itemDate.getMonth() + 1 === selectedMonthIndex;
+    });
+  }
+  return filtered.map(item => ({
+    ...item,
+    workedTime: parseFloat(item.workedTime).toFixed(2) + " h" // Begrenzung auf 2 Nachkommastellen
+  }));
+});
+
+// Watcher hinzufügen, um die Filter zu aktualisieren
+watch(() => saveTimeStore.timestore, () => {
+  updateFilters();
+});
+
+function updateFilters() {
+
+  if (selectedYear.value !== null && !years.value.includes(selectedYear.value)) {
+    selectedYear.value = null;
+  }
+
+  if (selectedMonth.value !== null && !months.includes(selectedMonth.value)) {
+    selectedMonth.value = null;
+  }
+}
 </script>
 
 
