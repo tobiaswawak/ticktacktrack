@@ -90,9 +90,9 @@
 <script setup>
 
 import GeneralLayout from "../layout/GeneralLayout.vue";
-import TimeCircleMonth from "../components/timeCircleMonth.vue";
-import TimeCircleWeek from "../components/timeCircleWeek.vue";
-import CurrentWeek from "../components/currentWeek.vue";
+import TimeCircleMonth from "../components/home/timeCircleMonth.vue";
+import TimeCircleWeek from "../components/home/timeCircleWeek.vue";
+import CurrentWeek from "../components/home/currentWeek.vue";
 
 </script>
 <style scoped>

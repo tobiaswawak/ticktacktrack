@@ -1,6 +1,6 @@
 <template>
   <v-card-title class="text-h5 my-2">
-    Monatsreport
+    Wochenreport
   </v-card-title>
 
   <div class="text-right ma-5">
@@ -11,38 +11,40 @@
       :width="30"
       color="primary"
     >
-      {{ progressHours }} / 160h
+      {{ progressHours }} / 40h
     </v-progress-circular>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useSaveTimeStore } from "../stores/saveTimeStore.js";
+import { ref, onMounted} from "vue";
+import {useSaveTimeStore} from "../../stores/saveTimeStore.js";
 
 const saveTimeStore = useSaveTimeStore();
+
 const progressValue = ref(0);
 const progressHours = ref(0);
 
 onMounted(() => {
-  calculateMonthHours();
+  calculateWeekHours();
 });
 
-const calculateMonthHours = () => {
+const calculateWeekHours = () => {
   const currentDate = new Date();
-  const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-  const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+  const firstDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
+  const lastDayOfWeek = new Date(firstDayOfWeek);
+  lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
 
   let totalHours = 0;
   saveTimeStore.timestore.forEach(item => {
     const itemDate = new Date(item.date);
-    if (itemDate >= firstDayOfMonth && itemDate <= lastDayOfMonth) {
+    if (itemDate >= firstDayOfWeek && itemDate <= lastDayOfWeek) {
       const workedTime = parseFloat(item.workedTime.replace("h", ""));
       totalHours += workedTime;
     }
   });
 
-  progressValue.value = totalHours * 100 / 160;
+  progressValue.value = totalHours * 100 / 40;
   progressHours.value = totalHours;
 };
 

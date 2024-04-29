@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { useSaveTimeStore } from "../stores/saveTimeStore.js";
+import { useSaveTimeStore } from "../../stores/saveTimeStore.js";
 import { onMounted } from "vue";
 
 const saveTimeStore = useSaveTimeStore();

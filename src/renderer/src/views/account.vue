@@ -37,7 +37,7 @@
 <script setup>
 
 import GeneralLayout from "../layout/GeneralLayout.vue";
-import AccountForm from "../components/accountForm.vue";
+import AccountForm from "../components/account/accountForm.vue";
 
 </script>
 <style scoped>

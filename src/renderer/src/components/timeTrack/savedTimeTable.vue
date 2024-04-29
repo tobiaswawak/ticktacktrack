@@ -53,7 +53,7 @@
 
 <script setup>
 import {computed, ref, watch} from "vue";
-import {useSaveTimeStore} from "../stores/saveTimeStore.js";
+import {useSaveTimeStore} from "../../stores/saveTimeStore.js";
 
 const saveTimeStore = useSaveTimeStore();
 
