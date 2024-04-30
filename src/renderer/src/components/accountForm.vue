@@ -52,22 +52,6 @@
     </v-row>
 
     <v-row class="mx-5">
-      <v-col cols="12">
-        <v-text-field
-          v-model="email"
-          label="E-Mail"
-          type="email"
-          :rules="rules"
-          required
-          variant="outlined"
-          color="primary"
-          prepend-icon="mdi-email-outline"
-        />
-      </v-col>
-    </v-row>
-
-
-    <v-row class="mx-5">
       <v-col cols="6">
         <v-text-field
           v-model="jobTitle"
@@ -119,15 +103,14 @@ const saveAccountData = useSaveAccountData();
 const form = ref(null);
 const firstName = ref("")
 const lastName = ref("")
-const email = ref("")
 const jobTitle = ref("")
 const workingHours = ref("")
+
 
 if (saveAccountData.accountData.length > 0) {
   const data = saveAccountData.accountData[0]; // Annahme: Es gibt nur einen Datensatz
   firstName.value = data.firstName;
   lastName.value = data.lastName;
-  email.value = data.email;
   jobTitle.value = data.jobTitle;
   workingHours.value = data.workingHours;
 }
@@ -145,7 +128,6 @@ const saveAccount = async () => {
     saveAccountData.accountData.splice(0, 1, {
       firstName: firstName.value,
       lastName: lastName.value,
-      email: email.value,
       jobTitle: jobTitle.value,
       workingHours: workingHours.value
     });
