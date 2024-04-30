@@ -44,10 +44,11 @@
             <!-- Profil -->
             <v-card
               class="mr-5"
+              height="78.5%"
               fluid
               border
             >
-              <v-card-text>Hier kommen Name und Profilbild hin</v-card-text>
+              <account-overview />
             </v-card>
 
             <!-- Gleitzeitkonto -->
@@ -56,7 +57,7 @@
               fluid
               border
             >
-              <v-card-text>Gleitzeitkonto</v-card-text>
+              <gleitzeit-konto />
             </v-card>
           </v-col>
         </v-row>
@@ -106,6 +107,8 @@ import GeneralLayout from "../layout/GeneralLayout.vue";
 import TimeCircleMonth from "../components/timeCircleMonth.vue";
 import TimeCircleWeek from "../components/timeCircleWeek.vue";
 import CurrentWeek from "../components/currentWeek.vue";
+import GleitzeitKonto from "../components/gleitzeitKonto.vue";
+import AccountOverview from "../components/accountOverview.vue";
 
 </script>
 <style scoped>
