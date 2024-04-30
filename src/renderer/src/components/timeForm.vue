@@ -10,13 +10,13 @@
         <v-col cols="12">
           <v-text-field
             v-model="date"
-            label="Datum"
-            type="date"
             :max="maxDate"
             :rules="[...rules, checkDuplicateEntry]"
-            required
-            variant="outlined"
             color="primary"
+            label="Datum"
+            required
+            type="date"
+            variant="outlined"
           />
         </v-col>
       </v-row>

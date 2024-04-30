@@ -12,28 +12,32 @@
     </v-card-title>
 
     <div class="hours-container mr-8">
-      <p>{{ overtime }} Gleitzeit</p>
+      <p>{{ totalOvertime }} Stunden</p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useSaveTimeStore } from "../stores/saveTimeStore.js";
-import { computed } from "vue";
+import { onMounted, ref } from "vue";
 
 const saveTimeStore = useSaveTimeStore();
+const totalOvertime = ref("");
 
-const totalHours = computed(() => {
-  return saveTimeStore.timestore.reduce((total, item) => {
-    return total + parseFloat(item.workedTime.replace("h", ""));
-  }, 0);
+onMounted(() => {
+  calculateTotalOvertime();
 });
 
-const overtime = computed(() => {
-  const standardHours = 40; // Standard-Arbeitsstunden pro Woche
-  const totalWorkedHours = totalHours.value;
-  return totalWorkedHours > standardHours ? totalWorkedHours - standardHours : 0;
-});
+const calculateTotalOvertime = () => {
+  let total = 0;
+  saveTimeStore.timestore.forEach(item => {
+    // Überprüfen, ob item.overtime eine gültige Zahl ist
+    if (!isNaN(parseFloat(item.overtime))) {
+      total += parseFloat(item.overtime);
+    }
+  });
+  totalOvertime.value = total.toFixed(2); // Aktualisiere den Wert von totalOvertime
+};
 </script>
 
 <style scoped>
@@ -43,6 +47,6 @@ const overtime = computed(() => {
 }
 
 .hours-container {
-  margin-left: auto; /* Pushes the hours to the right */
+  margin-left: auto; /* Bewegt die Stunden nach rechts */
 }
 </style>

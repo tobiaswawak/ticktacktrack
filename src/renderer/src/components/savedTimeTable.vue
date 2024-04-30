@@ -51,8 +51,8 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
-import { useSaveTimeStore } from "../stores/saveTimeStore.js";
+import {computed, ref, watch} from "vue";
+import {useSaveTimeStore} from "../stores/saveTimeStore.js";
 import {useSaveAccountData} from "../stores/saveAccountData.js";
 
 const saveTimeStore = useSaveTimeStore();
@@ -114,8 +114,8 @@ const transformDate = (date) => {
 // Gleitzeit / Überstunden
 const calculateOvertime = (workedTime) => {
   const standardWorkHoursPerDay = useAccountData.accountData[0].workingHours / 5; // TODO hier muss die Standard-Arbeitsstunden pro Tag hin
-  const overtime = workedTime - standardWorkHoursPerDay; // Berechnung der Überstunden
-  return overtime.toFixed(2) + " h"// Rückgabe der Überstunden oder "0 h" falls keine Überstunden
+  const overtime = workedTime - standardWorkHoursPerDay;
+  return overtime.toFixed(2) + " h"
 };
 
 const years = computed(() => {
@@ -124,12 +124,12 @@ const years = computed(() => {
 });
 const selectedYear = ref(null);
 
+const months = computed(() => {
+  const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const uniqueMonths = Array.from(new Set(saveTimeStore.timestore.map(item => new Date(item.date).getMonth())));
+  return uniqueMonths.sort((a, b) => a - b).map(index => monthNames[index]);
+});
 
-// Filter
-const months = [
-  "Januar", "Februar", "März", "April", "Mai", "Juni",
-  "Juli", "August", "September", "Oktober", "November", "Dezember"
-];
 const selectedMonth = ref(null);
 
 const filteredItems = computed(() => {
@@ -138,10 +138,9 @@ const filteredItems = computed(() => {
     filtered = filtered.filter(item => new Date(item.date).getFullYear() === selectedYear.value);
   }
   if (selectedMonth.value !== null) {
-    const selectedMonthIndex = months.findIndex(month => month === selectedMonth.value) + 1;
     filtered = filtered.filter(item => {
-      const itemDate = new Date(item.date);
-      return itemDate.getMonth() + 1 === selectedMonthIndex;
+      const itemMonth = new Date(item.date).toLocaleString("default", { month: "long" });
+      return itemMonth === selectedMonth.value;
     });
   }
   return filtered.map(item => ({
@@ -160,7 +159,7 @@ function updateFilters() {
   if (selectedYear.value !== null && !years.value.includes(selectedYear.value)) {
     selectedYear.value = null;
   }
-  if (selectedMonth.value !== null && !months.includes(selectedMonth.value)) {
+  if (selectedMonth.value !== null && !months.value.includes(selectedMonth.value)) {
     selectedMonth.value = null;
   }
 }
