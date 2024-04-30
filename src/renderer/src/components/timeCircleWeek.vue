@@ -1,24 +1,23 @@
 <template>
   <v-card-title class="text-h5 my-2">
-    Wochenreport
+    Meine Woche
   </v-card-title>
 
-  <div class="text-right ma-5">
+  <div class="ma-5">
     <v-progress-circular
       :model-value="progressValue"
       :rotate="360"
       :size="200"
       :width="30"
       color="primary"
-    >
-      {{ progressHours }} / 40h
-    </v-progress-circular>
+    />
+    {{ progressHours }} / 40h
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted} from "vue";
-import {useSaveTimeStore} from "../../stores/saveTimeStore.js";
+import {useSaveTimeStore} from "../stores/saveTimeStore.js";
 
 const saveTimeStore = useSaveTimeStore();
 

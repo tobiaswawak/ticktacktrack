@@ -87,7 +87,7 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-import {useSaveTimeStore} from "../../stores/saveTimeStore.js";
+import {useSaveTimeStore} from "../stores/saveTimeStore.js";
 
 const saveTimeStore = useSaveTimeStore();
 const form = ref(null);

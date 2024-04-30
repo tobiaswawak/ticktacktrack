@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="text-h5 my-2">
-      Meine Woche
+      Wochenübersicht
     </v-card-title>
 
     <!-- Zeilen -->
@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { useSaveTimeStore } from "../../stores/saveTimeStore.js";
+import { useSaveTimeStore } from "../stores/saveTimeStore.js";
 import { onMounted } from "vue";
 
 const saveTimeStore = useSaveTimeStore();

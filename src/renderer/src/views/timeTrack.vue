@@ -55,7 +55,7 @@
 
 <script setup>
 import GeneralLayout from "@/layout/GeneralLayout.vue";
-import SavedTimeTable from "../components/timeTrack/savedTimeTable.vue";
-import TimeForm from "../components/timeTrack/timeForm.vue";
-import FilterTable from "../components/timeTrack/filterTable.vue";
+import SavedTimeTable from "../components/savedTimeTable.vue";
+import TimeForm from "../components/timeForm.vue";
+import FilterTable from "../components/filterTable.vue";
 </script>

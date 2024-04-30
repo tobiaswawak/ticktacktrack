@@ -21,41 +21,13 @@
           </v-card-title>
         </v-card>
 
+        <!-- Zeile 1 -->
         <v-row justify="center">
           <v-col
             cols="12"
             sm="6"
           >
-            <!-- Woche -->
-            <v-card
-              class="ml-5"
-              fluid
-              border
-            >
-              <time-circle-week />
-            </v-card>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="6"
-          >
-            <!-- Monat -->
-            <v-card
-              class="mr-5"
-              fluid
-              border
-            >
-              <time-circle-month />
-            </v-card>
-          </v-col>
-        </v-row>
-        <v-row justify="center">
-          <v-col
-            cols="12"
-            sm="6"
-          >
-            <!-- Woche -->
+            <!-- Meine Woche -->
             <v-card
               class="ml-5"
               fluid
@@ -69,16 +41,57 @@
             cols="12"
             sm="6"
           >
-            <!-- Monat -->
+            <!-- Profil -->
             <v-card
               class="mr-5"
               fluid
               border
             >
-              <v-card-text>test</v-card-text>
+              <v-card-text>Hier kommen Name und Profilbild hin</v-card-text>
+            </v-card>
+
+            <!-- Gleitzeitkonto -->
+            <v-card
+              class="mr-5 mt-5"
+              fluid
+              border
+            >
+              <v-card-text>Gleitzeitkonto</v-card-text>
             </v-card>
           </v-col>
         </v-row>
+
+        <!-- Zeile 2 -->
+        <v-row justify="center">
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <!-- Kreis Woche -->
+            <v-card
+              class="ml-5"
+              fluid
+              border
+            >
+              <time-circle-week />
+            </v-card>
+          </v-col>
+
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <!-- Kreis Monat -->
+            <v-card
+              class="mr-5"
+              fluid
+              border
+            >
+              <time-circle-month />
+            </v-card>
+          </v-col>
+        </v-row>
+
 
 
         <v-container />
@@ -90,9 +103,9 @@
 <script setup>
 
 import GeneralLayout from "../layout/GeneralLayout.vue";
-import TimeCircleMonth from "../components/home/timeCircleMonth.vue";
-import TimeCircleWeek from "../components/home/timeCircleWeek.vue";
-import CurrentWeek from "../components/home/currentWeek.vue";
+import TimeCircleMonth from "../components/timeCircleMonth.vue";
+import TimeCircleWeek from "../components/timeCircleWeek.vue";
+import CurrentWeek from "../components/currentWeek.vue";
 
 </script>
 <style scoped>
