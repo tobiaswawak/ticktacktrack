@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="text-center pa-5">
+  <div class="text-center">
     <!-- Anzeige des ausgewählten Profilbilds -->
     <v-avatar size="100">
       <img
@@ -31,21 +31,8 @@
     />
   </div>
 
-  <v-form class="pa-5">
-    <v-row>
-      <v-col cols="12">
-        <v-text-field
-          label="Jobtitel"
-          type="input"
-          required
-          variant="outlined"
-          color="primary"
-          prepend-icon="mdi-briefcase-outline"
-        />
-      </v-col>
-    </v-row>
-
-    <v-row>
+  <v-form class>
+    <v-row dense>
       <v-col cols="6">
         <v-text-field
           label="Vorname"
@@ -67,21 +54,43 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="12">
+    <v-row dense>
+  <v-col cols="12">
+    <v-text-field
+      label="E-Mail"
+      type="email"
+      required
+      variant="outlined"
+      color="primary"
+      prepend-icon="mdi-email-outline"
+    />
+  </v-col>
+</v-row>
+
+
+    <v-row dense>
+      <v-col cols="6">
         <v-text-field
-          label="E-Mail"
-          type="email"
+          label="Jobtitel"
+          type="input"
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-email-outline"
+          prepend-icon="mdi-briefcase-outline"
         />
-        <v-icon />
+      </v-col>
+      <v-col cols="6">
+        <v-text-field
+          label="Arbeitsstunden"
+          type="number"
+          required
+          variant="outlined"
+          color="primary"
+        />
       </v-col>
     </v-row>
 
-    <v-row justify="center">
+    <v-row justify="center" dense>
       <v-col cols="auto">
         <v-btn
           type="submit"
