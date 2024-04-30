@@ -3,7 +3,7 @@
     Meine Woche
   </v-card-title>
 
-  <div class="ma-5">
+  <div class="progress-container ma-5">
     <v-progress-circular
       :model-value="progressValue"
       :rotate="360"
@@ -11,7 +11,9 @@
       :width="30"
       color="primary"
     />
-    {{ progressHours }} / 40h
+    <div class="progress-hours">
+      {{ progressHours }} / 40 h
+    </div>
   </div>
 </template>
 
@@ -50,4 +52,17 @@ const calculateWeekHours = () => {
 </script>
 
 <style scoped>
+
+.progress-container {
+  display: flex;
+  align-items: center;
+}
+
+.progress-hours {
+  margin-left: 10%;
+  width: 50% ;
+  text-align: center;
+  font-size: 45px;
+  justify-content: center;
+}
 </style>

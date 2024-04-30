@@ -3,7 +3,7 @@
     Mein Monat
   </v-card-title>
 
-  <div class="ma-5">
+  <div class="progress-container ma-5">
     <v-progress-circular
       :model-value="progressValue"
       :rotate="360"
@@ -11,7 +11,9 @@
       :width="30"
       color="primary"
     />
-    {{ progressHours }} / 160h
+    <div class="progress-hours">
+      {{ progressHours }} / 160h
+    </div>
   </div>
 </template>
 
@@ -30,7 +32,7 @@ onMounted(() => {
 const calculateMonthHours = () => {
   const currentDate = new Date();
   const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-  const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+  const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
 
   let totalHours = 0;
   saveTimeStore.timestore.forEach(item => {
@@ -48,4 +50,18 @@ const calculateMonthHours = () => {
 </script>
 
 <style scoped>
+
+.progress-container {
+  display: flex;
+  align-items: center;
+}
+
+.progress-hours {
+  margin-left: 10%;
+  width: 50% ;
+  text-align: center;
+  font-size: 45px;
+  justify-content: center;
+}
+
 </style>

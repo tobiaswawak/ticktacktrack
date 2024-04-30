@@ -1,31 +1,29 @@
 <template>
-  <v-card>
-    <v-card-title class="text-h5 my-2">
-      Wochenübersicht
-    </v-card-title>
+  <v-card-title class="text-h5 my-2">
+    Wochenübersicht
+  </v-card-title>
 
-    <!-- Zeilen -->
-    <v-container>
-      <v-row
-        v-for="(day, index) in weekDays"
-        :key="index"
+  <!-- Zeilen -->
+  <v-container>
+    <v-row
+      v-for="(day, index) in weekDays"
+      :key="index"
+    >
+      <v-col
+        cols="5"
+        class="my-2"
       >
-        <v-col
-          cols="5"
-          class="my-2"
-        >
-          <p>{{ getDayLabel(day) }}</p>
-        </v-col>
-        <v-col
-          cols="7"
-          class="text-end my-2"
-        >
-          <p>{{ getFormattedHours(day.hours) }}</p>
-        </v-col>
-        <v-divider />
-      </v-row>
-    </v-container>
-  </v-card>
+        <p>{{ getDayLabel(day) }}</p>
+      </v-col>
+      <v-col
+        cols="7"
+        class="text-end my-2"
+      >
+        <p>{{ getFormattedHours(day.hours) }}</p>
+      </v-col>
+      <v-divider />
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
