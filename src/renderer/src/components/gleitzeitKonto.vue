@@ -12,7 +12,7 @@
     </v-card-title>
 
     <div class="hours-container mr-8">
-      <p>{{ overtime }} Überstunden</p>
+      <p>{{ overtime }} Gleitzeit</p>
     </div>
   </div>
 </template>

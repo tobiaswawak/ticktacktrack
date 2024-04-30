@@ -50,15 +50,15 @@
   </v-data-table-virtual>
 </template>
 
-
 <script setup>
-import {computed, ref, watch} from "vue";
-import {useSaveTimeStore} from "../stores/saveTimeStore.js";
+import { computed, ref, watch } from "vue";
+import { useSaveTimeStore } from "../stores/saveTimeStore.js";
+import {useSaveAccountData} from "../stores/saveAccountData.js";
 
 const saveTimeStore = useSaveTimeStore();
+const useAccountData = useSaveAccountData();
 
 let headerVariables = ref([
-
   {
     align: "begin",
     key: "date",
@@ -89,7 +89,12 @@ let headerVariables = ref([
     sortable: false,
     title: "Dauer"
   },
-
+  {
+    align: "begin",
+    key: "overtime",
+    sortable: false,
+    title: "Gleitzeit"
+  },
   {
     align: "end",
     key: "action",
@@ -103,9 +108,15 @@ const deleteItem = (index) => {
 };
 
 const transformDate = (date) => {
-  return new Date(date).toLocaleString("de-DE", {weekday: "long"})
-    .substring(0, 2) + ". " + new Date(date).toLocaleDateString()
-}
+  return new Date(date).toLocaleString("de-DE", { weekday: "long" }).substring(0, 2) + ". " + new Date(date).toLocaleDateString()
+};
+
+// Gleitzeit / Überstunden
+const calculateOvertime = (workedTime) => {
+  const standardWorkHoursPerDay = useAccountData.accountData[0].workingHours / 5; // TODO hier muss die Standard-Arbeitsstunden pro Tag hin
+  const overtime = workedTime - standardWorkHoursPerDay; // Berechnung der Überstunden
+  return overtime.toFixed(2) + " h"// Rückgabe der Überstunden oder "0 h" falls keine Überstunden
+};
 
 const years = computed(() => {
   const uniqueYears = Array.from(new Set(saveTimeStore.timestore.map(item => new Date(item.date).getFullYear())));
@@ -113,6 +124,8 @@ const years = computed(() => {
 });
 const selectedYear = ref(null);
 
+
+// Filter
 const months = [
   "Januar", "Februar", "März", "April", "Mai", "Juni",
   "Juli", "August", "September", "Oktober", "November", "Dezember"
@@ -133,7 +146,8 @@ const filteredItems = computed(() => {
   }
   return filtered.map(item => ({
     ...item,
-    workedTime: parseFloat(item.workedTime).toFixed(2) + " h" // Begrenzung auf 2 Nachkommastellen
+    workedTime: parseFloat(item.workedTime).toFixed(2) + " h", // Begrenzung auf 2 Nachkommastellen
+    overtime: calculateOvertime(parseFloat(item.workedTime))
   }));
 });
 
@@ -143,11 +157,9 @@ watch(() => saveTimeStore.timestore, () => {
 });
 
 function updateFilters() {
-
   if (selectedYear.value !== null && !years.value.includes(selectedYear.value)) {
     selectedYear.value = null;
   }
-
   if (selectedMonth.value !== null && !months.includes(selectedMonth.value)) {
     selectedMonth.value = null;
   }
