@@ -8,8 +8,11 @@
           color="surface-variant"
         />
       </v-avatar>
-      <v-card-title class="text-h5">
-        Max Mustermann
+      <v-card-title
+        v-model="name"
+        class="text-h5"
+      >
+        {{ name }}
       </v-card-title>
     </div>
   </div>
@@ -22,7 +25,7 @@
     </v-icon>
 
     <v-card-title class="text-h6 my-2 ml-3">
-      UX Designer
+      {{ job }}
     </v-card-title>
   </div>
 
@@ -35,12 +38,26 @@
     </v-icon>
 
     <v-card-title class="text-h6 my-2 ml-3">
-      Vollzeitkraft
+      {{ hours }}
     </v-card-title>
   </div>
 </template>
 
 <script setup>
+import {ref} from "vue";
+import {useSaveAccountData} from "../stores/saveAccountData.js";
+const name = ref("")
+const job = ref("")
+const hours = ref("")
+const saveAccountData = useSaveAccountData();
+const data = saveAccountData.accountData[0];
+name.value = data.firstName +" "+ data.lastName;
+job.value = data.jobTitle;
+hours.value = data.workingHours + " Stunden";
+
+
+
+
 </script>
 
 <style scoped>
