@@ -1,38 +1,45 @@
-<script setup>
 
-</script>
 
 <template>
-  <div class="text-center">
-    <!-- Anzeige des ausgewählten Profilbilds -->
-    <v-avatar size="100">
-      <img
-        :src="selectedImage"
-        v-if="selectedImage"
-        alt="Profilbild"
-      >
-      <v-icon
-        v-else
-        size="80"
-      >
-        mdi-account-circle
-      </v-icon>
-    </v-avatar>
+  <!-- Anzeige des ausgewählten Profilbilds -->
+  <v-row class="mt-5">
+    <!-- Profilbild -->
+    <v-col
+      cols="1"
+      class="ml-5"
+    >
+      <v-avatar size="100">
+        <img
+          :src="selectedImage"
+          v-if="selectedImage"
+          alt="Profilbild"
+        >
+        <v-icon
+          v-else
+          size="80"
+        >
+          mdi-account-circle
+        </v-icon>
+      </v-avatar>
+    </v-col>
 
     <!-- Eingabefeld für die Profilbildauswahl -->
-    <v-file-input
-      v-model="selectedImage"
-      accept="image/*"
-      label="Profilbild wählen"
-      variant="outlined"
-      color="primary"
-      outlined
-      prepend-icon="mdi-camera-outline"
-    />
-  </div>
+    <v-col
+      cols="10"
+      align-self="center"
+    >
+      <v-btn
+        v-model="selectedImage"
+        accept="image/*"
+        color="primary"
+      >
+        Profilbild hochladen
+      </v-btn>
+    </v-col>
+  </v-row>
 
-  <v-form class>
-    <v-row dense>
+  <v-form class="mt-5">
+    <v-row class="mx-5">
       <v-col cols="6">
         <v-text-field
           label="Vorname"
@@ -43,6 +50,7 @@
           prepend-icon="mdi-rename-outline"
         />
       </v-col>
+
       <v-col cols="6">
         <v-text-field
           label="Nachname"
@@ -54,21 +62,21 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
-  <v-col cols="12">
-    <v-text-field
-      label="E-Mail"
-      type="email"
-      required
-      variant="outlined"
-      color="primary"
-      prepend-icon="mdi-email-outline"
-    />
-  </v-col>
-</v-row>
+    <v-row class="mx-5">
+      <v-col cols="12">
+        <v-text-field
+          label="E-Mail"
+          type="email"
+          required
+          variant="outlined"
+          color="primary"
+          prepend-icon="mdi-email-outline"
+        />
+      </v-col>
+    </v-row>
 
 
-    <v-row dense>
+    <v-row class="mx-5">
       <v-col cols="6">
         <v-text-field
           label="Jobtitel"
@@ -79,6 +87,7 @@
           prepend-icon="mdi-briefcase-outline"
         />
       </v-col>
+
       <v-col cols="6">
         <v-text-field
           label="Arbeitsstunden"
@@ -90,7 +99,10 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center" dense>
+    <v-row
+      justify="center"
+      class="mb-5"
+    >
       <v-col cols="auto">
         <v-btn
           type="submit"
@@ -114,6 +126,15 @@
   </v-form>
 </template>
 
-<style scoped>
 
+<script setup>
+import { ref } from "vue";
+
+const selectedImage = ref(null);
+</script>
+
+<style scoped>
+v-form {
+  transition: all 0.3s ease;
+}
 </style>
