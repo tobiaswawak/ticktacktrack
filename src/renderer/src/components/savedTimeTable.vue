@@ -111,12 +111,6 @@ const transformDate = (date) => {
   return new Date(date).toLocaleString("de-DE", { weekday: "long" }).substring(0, 2) + ". " + new Date(date).toLocaleDateString()
 };
 
-// Gleitzeit / Überstunden
-const calculateOvertime = (workedTime) => {
-  const standardWorkHoursPerDay = useAccountData.accountData[0].workingHours / 5; // TODO hier muss die Standard-Arbeitsstunden pro Tag hin
-  const overtime = workedTime - standardWorkHoursPerDay;
-  return overtime.toFixed(2) + " h"
-};
 
 const years = computed(() => {
   const uniqueYears = Array.from(new Set(saveTimeStore.timestore.map(item => new Date(item.date).getFullYear())));
@@ -146,7 +140,6 @@ const filteredItems = computed(() => {
   return filtered.map(item => ({
     ...item,
     workedTime: parseFloat(item.workedTime).toFixed(2) + " h", // Begrenzung auf 2 Nachkommastellen
-    overtime: calculateOvertime(parseFloat(item.workedTime))
   }));
 });
 

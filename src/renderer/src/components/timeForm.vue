@@ -88,8 +88,11 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {useSaveTimeStore} from "../stores/saveTimeStore.js";
+import {useSaveAccountData} from "../stores/saveAccountData.js";
 
 const saveTimeStore = useSaveTimeStore();
+const useAccountData = useSaveAccountData();
+
 const form = ref(null);
 const maxDate = ref("");
 const startTime = ref("");
@@ -145,12 +148,20 @@ const saveTime = async () => {
     // Arbeitszeit in Stunden umrechnen
     const totalWorkedTimeHours = totalWorkedTimeMinutes / 60;
 
+    // Gleitzeit / Überstunden
+
+    const standardWorkHoursPerDay = useAccountData.accountData[0].workingHours / 5; //
+    let overtime = totalWorkedTimeHours - standardWorkHoursPerDay;
+    overtime = overtime.toFixed(2) + " h"
+
+
     const input = {
       date: date.value,
       startTime: startTime.value,
       endTime: endTime.value,
       pause: pause.value + " min",
-      workedTime: totalWorkedTimeHours.toFixed(2) + "h" // Dauer auf zwei Nachkommastellen begrenzen
+      workedTime: totalWorkedTimeHours.toFixed(2) + "h", // Dauer auf zwei Nachkommastellen begrenzen
+      overtime: overtime
     };
 
     const existingEntry = saveTimeStore.timestore.find(item => item.date === input.date);
