@@ -48,9 +48,7 @@
               fluid
               border
             >
-              <!--
               <account-overview />
-              -->
             </v-card>
 
             <!-- Gleitzeitkonto -->
