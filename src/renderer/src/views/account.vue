@@ -1,31 +1,14 @@
 <template>
   <GeneralLayout>
-    <v-container
-      class="fill-height"
-      fluid
-    >
-      <v-card
-        class="justify-center border-round"
-        width="100%"
-        height="100%"
-        fluid
-        border
-      >
-        <v-card
-          class="ma-5"
-          fluid
-          border
-        >
+    <v-container class="fill-height" fluid>
+      <v-card class="justify-center border-round" width="100%" height="100%" fluid border>
+        <v-card class="ma-5" fluid border>
           <v-card-title class="text-h5 my-2">
-            🧑🏼 Mein Account
+            <span class="mdi mdi-account"></span> Mein Account
           </v-card-title>
         </v-card>
         <!-- Formular -->
-        <v-card
-          class="ma-5"
-          fluid
-          border
-        >
+        <v-card class="ma-5" fluid border>
           <account-form />
         </v-card>
       </v-card>

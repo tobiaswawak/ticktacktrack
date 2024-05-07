@@ -1,62 +1,30 @@
 <template>
   <GeneralLayout>
-    <v-container
-      class="fill-height"
-      fluid
-    >
-      <v-card
-        class="justify-center border-round"
-        width="100%"
-        height="100%"
-        fluid
-        border
-      >
-        <v-card
-          class="ma-5"
-          fluid
-          border
-        >
+    <v-container class="fill-height" fluid>
+      <v-card class="justify-center border-round" width="100%" height="100%" fluid border>
+        <v-card class="ma-5" fluid border>
           <v-card-title class="text-h5 my-2">
-            🏠 Home
+            <span class="mdi mdi-home"></span> Home
           </v-card-title>
         </v-card>
 
         <!-- Zeile 1 -->
         <v-row justify="center">
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <!-- Meine Woche -->
-            <v-card
-              class="ml-5"
-              fluid
-              border
-            >
+            <v-card class="ml-5" fluid border>
               <current-week />
             </v-card>
           </v-col>
 
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <!-- Profil -->
-            <v-card
-              class="mr-5"
-              height="78.5%"
-              fluid
-              border
-            >
+            <v-card class="mr-5" height="78.5%" fluid border>
               <account-overview />
             </v-card>
 
             <!-- Gleitzeitkonto -->
-            <v-card
-              class="mr-5 mt-5"
-              fluid
-              border
-            >
+            <v-card class="mr-5 mt-5" fluid border>
               <!--
               <gleitzeit-konto />
               -->
@@ -66,30 +34,16 @@
 
         <!-- Zeile 2 -->
         <v-row justify="center">
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <!-- Kreis Woche -->
-            <v-card
-              class="ml-5"
-              fluid
-              border
-            >
+            <v-card class="ml-5" fluid border>
               <time-circle-week />
             </v-card>
           </v-col>
 
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <!-- Kreis Monat -->
-            <v-card
-              class="mr-5"
-              fluid
-              border
-            >
+            <v-card class="mr-5" fluid border>
               <time-circle-month />
             </v-card>
           </v-col>
@@ -114,7 +68,6 @@ import AccountOverview from "../components/accountOverview.vue";
 
 </script>
 <style scoped>
-
 .border-round {
   border-radius: 10px;
 }

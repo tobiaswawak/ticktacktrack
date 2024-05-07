@@ -4,15 +4,9 @@
   </v-card-title>
 
   <div class="progress-container ma-5">
-    <v-progress-circular
-      :model-value="progressValue"
-      :rotate="360"
-      :size="200"
-      :width="30"
-      color="primary"
-    />
+    <v-progress-circular :model-value="progressValue" :rotate="360" :size="200" :width="30" color="primary" />
     <div class="progress-hours">
-      {{ progressHours }} / 160h
+      {{ progressHours }} / {{ hours }}h
     </div>
   </div>
 </template>
@@ -20,10 +14,17 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useSaveTimeStore } from "../stores/saveTimeStore.js";
+import { useSaveAccountData } from "../stores/saveAccountData.js";
+const hours = ref("");
 
 const saveTimeStore = useSaveTimeStore();
+const saveAccountData = useSaveAccountData();
+const data = saveAccountData.accountData;
+
 const progressValue = ref(0);
 const progressHours = ref(0);
+
+hours.value = data.workingHours * 4;
 
 onMounted(() => {
   calculateMonthHours();
@@ -50,7 +51,6 @@ const calculateMonthHours = () => {
 </script>
 
 <style scoped>
-
 .progress-container {
   display: flex;
   align-items: center;
@@ -58,10 +58,9 @@ const calculateMonthHours = () => {
 
 .progress-hours {
   margin-left: 10%;
-  width: 50% ;
+  width: 50%;
   text-align: center;
   font-size: 45px;
   justify-content: center;
 }
-
 </style>

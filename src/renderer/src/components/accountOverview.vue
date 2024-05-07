@@ -4,21 +4,14 @@
       <v-avatar size="80">
         <v-img :src="image" />
       </v-avatar>
-      <v-card-title
-        v-model="name"
-        class="text-h5"
-        v-if="image!==null"
-      >
+      <v-card-title v-model="name" class="text-h5" v-if="image !== null">
         {{ name }}
       </v-card-title>
     </div>
   </div>
   <div class="title-container ml-13">
-    <v-icon
-      color="primary"
-      size="35"
-    >
-      mdi-account-tie
+    <v-icon color="primary" size="35">
+      mdi-account-tie-outline
     </v-icon>
 
     <v-card-title class="text-h6 my-2 ml-3">
@@ -27,11 +20,8 @@
   </div>
 
   <div class="title-container ml-13">
-    <v-icon
-      color="primary"
-      size="35"
-    >
-      mdi-briefcase
+    <v-icon color="primary" size="35">
+      mdi-briefcase-outline
     </v-icon>
 
     <v-card-title class="text-h6 my-2 ml-3">
@@ -41,15 +31,15 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-import {useSaveAccountData} from "../stores/saveAccountData.js";
+import { ref } from "vue";
+import { useSaveAccountData } from "../stores/saveAccountData.js";
 const name = ref("")
 const job = ref("")
 const hours = ref("")
 const image = ref("")
 const saveAccountData = useSaveAccountData();
 const data = saveAccountData.accountData;
-name.value = data.firstName +" "+ data.lastName;
+name.value = data.firstName + " " + data.lastName;
 job.value = data.jobTitle;
 hours.value = data.workingHours + " Stunden";
 image.value = data.image;
@@ -71,5 +61,4 @@ image.value = data.image;
   display: flex;
   align-items: center;
 }
-
 </style>
