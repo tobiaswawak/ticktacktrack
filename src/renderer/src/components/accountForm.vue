@@ -121,7 +121,6 @@ const rules = [
   },
 ];
 onMounted(() => {
-  console.log(saveAccountData.accountData.image)
   userdata.value = saveAccountData.accountData;
 });
 
