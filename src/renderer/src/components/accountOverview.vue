@@ -2,8 +2,8 @@
   <div class="profile-container mt-5 ml-5">
     <div class="profile-info d-flex align-center justify-space-around ma-5">
       <v-avatar size="80">
-      <v-img :src="image" />
-    </v-avatar>
+        <v-img :src="image" />
+      </v-avatar>
       <v-card-title
         v-model="name"
         class="text-h5"
@@ -53,10 +53,6 @@ name.value = data.firstName +" "+ data.lastName;
 job.value = data.jobTitle;
 hours.value = data.workingHours + " Stunden";
 image.value = data.image;
-
-
-
-
 </script>
 
 <style scoped>
