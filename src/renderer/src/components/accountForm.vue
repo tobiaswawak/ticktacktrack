@@ -1,25 +1,35 @@
 <template>
   <div class="ma-5 ml-7">
     <v-avatar size="80">
-      <v-img
-        alt="Profilbild"
-        src="/src/images/Max_Mustermann.jpg"
-        color="surface-variant"
-      />
+      <v-img :src="userdata.image" />
     </v-avatar>
-
     <v-btn
-      v-model="selectedImage"
+      v-if="userdata.image!==null"
+      icon="mdi-trash-can"
+      border
+      @click="deleteProfileImg()"
+      class="ml-5"
+    />
+    <v-file-input
+      v-else
+      v-model="image"
       accept="image/*"
       color="primary"
-      class="ml-7"
+      variant="outlined"
+      label="Profilbild auswählen"
     >
-      Profilbild hochladen
-    </v-btn>
+      <template #append>
+        <v-btn
+          border
+          @click="saveImg()"
+        >
+          <v-icon>mdi-content-save</v-icon>
+        </v-btn>
+      </template>
+    </v-file-input>
   </div>
 
   <v-form
-    @submit.prevent="saveAccount"
     lazy-validation
     ref="form"
     class="mt-5"
@@ -27,7 +37,7 @@
     <v-row class="mx-5">
       <v-col cols="6">
         <v-text-field
-          v-model="firstName"
+          v-model="userdata.firstName"
           label="Vorname"
           type="text"
           :rules="rules"
@@ -40,7 +50,7 @@
 
       <v-col cols="6">
         <v-text-field
-          v-model="lastName"
+          v-model="userdata.lastName"
           label="Nachname"
           type="input"
           :rules="rules"
@@ -54,7 +64,7 @@
     <v-row class="mx-5">
       <v-col cols="6">
         <v-text-field
-          v-model="jobTitle"
+          v-model="userdata.jobTitle"
           label="Jobtitel"
           type="text"
           :rules="rules"
@@ -67,7 +77,7 @@
 
       <v-col cols="6">
         <v-text-field
-          v-model="workingHours"
+          v-model="userdata.workingHours"
           label="Arbeitsstunden pro Woche"
           type="number"
           :rules="rules"
@@ -84,9 +94,9 @@
     >
       <v-col cols="auto">
         <v-btn
-          type="submit"
+          border
+          @click="saveUserData"
           color="primary"
-          prepend-icon="mdi-check"
         >
           Speichern
         </v-btn>
@@ -97,41 +107,35 @@
 
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useSaveAccountData} from "../stores/saveAccountData.js";
+
 const saveAccountData = useSaveAccountData();
 const form = ref(null);
-const firstName = ref("")
-const lastName = ref("")
-const jobTitle = ref("")
-const workingHours = ref("")
-
-
-if (saveAccountData.accountData.length > 0) {
-  const data = saveAccountData.accountData[0]; // Annahme: Es gibt nur einen Datensatz
-  firstName.value = data.firstName;
-  lastName.value = data.lastName;
-  jobTitle.value = data.jobTitle;
-  workingHours.value = data.workingHours;
-}
-
+let userdata = ref({})
+let image = ref(null)
 const rules = [
   value => {
     if (value) return true;
     return "Bitte eintragen";
   },
 ];
+onMounted(() => {
+  console.log(saveAccountData.accountData.image)
+  userdata.value = saveAccountData.accountData;
+});
 
-const saveAccount = async () => {
-    const valid = await form.value.validate();
-  if (valid.valid) {
-    saveAccountData.accountData.splice(0, 1, {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      jobTitle: jobTitle.value,
-      workingHours: workingHours.value
-    });
-  }
+const deleteProfileImg = () => {
+  saveAccountData.accountData.image = null
+}
+
+const saveUserData = () => {
+  saveAccountData.accountData = userdata.value
+}
+
+const saveImg = () => {
+  userdata.value.image = URL.createObjectURL(image.value)
+  image.value=null
 }
 
 </script>

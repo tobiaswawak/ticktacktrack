@@ -44,7 +44,7 @@ const calculateMonthHours = () => {
   });
 
   progressValue.value = totalHours * 100 / 160;
-  progressHours.value = totalHours;
+  progressHours.value = totalHours.toFixed(2);
 };
 
 </script>

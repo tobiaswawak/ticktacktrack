@@ -150,7 +150,7 @@ const saveTime = async () => {
 
     // Gleitzeit / Überstunden
 
-    const standardWorkHoursPerDay = useAccountData.accountData[0].workingHours / 5; //
+    const standardWorkHoursPerDay = useAccountData.accountData.workingHours / 5; //
     let overtime = totalWorkedTimeHours - standardWorkHoursPerDay;
     overtime = overtime.toFixed(2) + " h"
 
