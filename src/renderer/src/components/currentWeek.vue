@@ -1,29 +1,30 @@
 <template>
-  <v-card-title class="text-h5 my-2">
-    Wochenübersicht
-  </v-card-title>
+  <v-card>
+    <v-card-title class="text-h5 my-2">
+      Wochenübersicht
+    </v-card-title>
 
-  <!-- Zeilen -->
-  <v-container>
-    <v-row
-      v-for="(day, index) in weekDays"
-      :key="index"
-    >
-      <v-col
-        cols="5"
-        class="my-2"
-      >
-        <p>{{ getDayLabel(day) }}</p>
-      </v-col>
-      <v-col
-        cols="7"
-        class="text-end my-2"
-      >
-        <p>{{ getFormattedHours(day.hours) }}</p>
-      </v-col>
-      <v-divider />
-    </v-row>
-  </v-container>
+    <v-container>
+      <v-row v-for="(day, index) in weekDays" :key="index">
+        <v-container>
+          <v-col cols="3">
+            <p>{{ getDayLabelName(day) }}</p>
+          </v-col>
+        </v-container>
+        <v-container>
+          <v-col cols="12" align="right">
+            <p>{{ getFormattedHours(day.hours) }}</p>
+          </v-col>
+        </v-container>
+        <v-container>
+          <v-col cols="3">
+            <p>{{ getDayLabel(day) }}</p>
+          </v-col>
+        </v-container>
+        <v-divider />
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
 
 <script setup>
@@ -44,15 +45,19 @@ onMounted(() => {
 
 
 const weekDays = [
-  {name: "Montag", date: new Date(firstDayOfWeek), hours: 0},
-  {name: "Dienstag", date: new Date(firstDayOfWeek.getTime() + (24 * 60 * 60 * 1000)), hours: 0},
-  {name: "Mittwoch", date: new Date(firstDayOfWeek.getTime() + (2 * 24 * 60 * 60 * 1000)), hours: 0},
-  {name: "Donnerstag", date: new Date(firstDayOfWeek.getTime() + (3 * 24 * 60 * 60 * 1000)), hours: 0},
-  {name: "Freitag", date: new Date(firstDayOfWeek.getTime() + (4 * 24 * 60 * 60 * 1000)), hours: 0}
+  { name: "Montag", date: new Date(firstDayOfWeek), hours: 0 },
+  { name: "Dienstag", date: new Date(firstDayOfWeek.getTime() + (24 * 60 * 60 * 1000)), hours: 0 },
+  { name: "Mittwoch", date: new Date(firstDayOfWeek.getTime() + (2 * 24 * 60 * 60 * 1000)), hours: 0 },
+  { name: "Donnerstag", date: new Date(firstDayOfWeek.getTime() + (3 * 24 * 60 * 60 * 1000)), hours: 0 },
+  { name: "Freitag", date: new Date(firstDayOfWeek.getTime() + (4 * 24 * 60 * 60 * 1000)), hours: 0 }
 ];
 
 const getDayLabel = (day) => {
-  return day.name + " " + day.date.toLocaleDateString("de-DE");
+  return day.date.toLocaleDateString("de-DE");
+};
+
+const getDayLabelName = (day) => {
+  return day.name;
 };
 
 const getWorkedHours = () => {
@@ -76,5 +81,4 @@ const getFormattedHours = (hours) => {
 
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
