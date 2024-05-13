@@ -6,20 +6,14 @@
 
     <v-container>
       <v-row v-for="(day, index) in weekDays" :key="index">
-        <v-container>
-          <v-col cols="3">
-            <p>{{ getDayLabelName(day) }}</p>
-          </v-col>
+        <v-container class="width spacer">
+          <p class="day-name"> {{ getDayLabelName(day) }}</p>
+          <p>{{ getDayLabel(day) }}</p>
         </v-container>
-        <v-container>
-          <v-col cols="12" align="right">
-            <p>{{ getFormattedHours(day.hours) }}</p>
-          </v-col>
-        </v-container>
-        <v-container>
-          <v-col cols="3">
-            <p>{{ getDayLabel(day) }}</p>
-          </v-col>
+
+
+        <v-container class="width vertical-center spacer">
+          <p>{{ getFormattedHours(day.hours) }}</p>
         </v-container>
         <v-divider />
       </v-row>
@@ -81,4 +75,28 @@ const getFormattedHours = (hours) => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.width {
+  width: 50%;
+}
+
+.vertical-center {
+  display: flex;
+  flex-direction: column;
+  /* Die Elemente vertikal anordnen */
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+  /* Die Höhe des Containers auf die gesamte Bildschirmhöhe setzen */
+}
+
+.spacer {
+  height: 80px;
+  /* Vertikaler Abstand zwischen den Containern */
+}
+
+.day-name {
+  font-weight: bold;
+  /* Schriftstärke auf fett setzen */
+}
+</style>
