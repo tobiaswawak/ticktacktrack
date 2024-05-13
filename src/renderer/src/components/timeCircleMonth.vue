@@ -56,7 +56,7 @@ const calculateMonthHours = () => {
     }
   });
 
-  progressValue.value = totalHours * 100 / 160;
+  progressValue.value = totalHours * 100 / (hours.value);
   progressHours.value = totalHours.toFixed(2);
 };
 

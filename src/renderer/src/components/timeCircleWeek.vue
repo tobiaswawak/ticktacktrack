@@ -60,7 +60,7 @@ const calculateWeekHours = () => {
     }
   });
 
-  progressValue.value = totalHours * 100 / 40;
+  progressValue.value = totalHours * 100 / hours.value;
   progressHours.value = totalHours.toFixed(2);
 };
 
