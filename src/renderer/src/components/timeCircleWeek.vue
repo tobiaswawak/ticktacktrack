@@ -1,10 +1,16 @@
 <template>
   <v-card-title class="text-h5 my-2">
-    Meine Woche
+    Meine Woche - {{ getWeekLabel() }}
   </v-card-title>
 
   <div class="progress-container ma-5">
-    <v-progress-circular :model-value="progressValue" :rotate="360" :size="200" :width="30" color="primary" />
+    <v-progress-circular
+      :model-value="progressValue"
+      :rotate="360"
+      :size="200"
+      :width="30"
+      color="primary"
+    />
     <div class="progress-hours">
       {{ progressHours }} / {{ hours }}h
     </div>
@@ -29,6 +35,15 @@ const progressHours = ref(0);
 onMounted(() => {
   calculateWeekHours();
 });
+
+const getWeekLabel = () => {
+
+    const now = new Date();
+    const onejan = new Date(now.getFullYear(), 0, 1);
+    const week = Math.ceil( (((now - onejan) / 86400000) + onejan.getDay() + 1) / 7 );
+    return "KW " + week;
+
+};
 
 const calculateWeekHours = () => {
   const currentDate = new Date();

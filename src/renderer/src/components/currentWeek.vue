@@ -5,17 +5,26 @@
     </v-card-title>
 
     <v-container>
-      <v-row v-for="(day, index) in weekDays" :key="index">
-        <v-container class="width spacer">
-          <p class="day-name"> {{ getDayLabelName(day) }}</p>
-          <p>{{ getDayLabel(day) }}</p>
+      <v-row
+        v-for="(day, index) in weekDays"
+        :key="index"
+      >
+        <v-container class="width">
+          <p class="font-weight-bold">
+            {{ getDayLabelName(day) }}
+          </p>
+          <p>
+            {{ getDayLabel(day) }}
+          </p>
         </v-container>
-
 
         <v-container class="width vertical-center spacer">
           <p>{{ getFormattedHours(day.hours) }}</p>
         </v-container>
-        <v-divider />
+        <v-divider
+          v-if="!isFriday(day)"
+          class="mx-3"
+        />
       </v-row>
     </v-container>
   </v-card>
@@ -54,6 +63,10 @@ const getDayLabelName = (day) => {
   return day.name;
 };
 
+const isFriday = (day) => {
+  return day.name === "Freitag";
+};
+
 const getWorkedHours = () => {
   saveTimeStore.timestore.forEach(item => {
     const itemDate = new Date(item.date);
@@ -87,16 +100,10 @@ const getFormattedHours = (hours) => {
   justify-content: center;
   align-items: flex-end;
   height: 100vh;
-  /* Die Höhe des Containers auf die gesamte Bildschirmhöhe setzen */
 }
 
 .spacer {
   height: 80px;
-  /* Vertikaler Abstand zwischen den Containern */
 }
 
-.day-name {
-  font-weight: bold;
-  /* Schriftstärke auf fett setzen */
-}
 </style>

@@ -1,10 +1,16 @@
 <template>
   <v-card-title class="text-h5 my-2">
-    Mein Monat
+    Mein Monat - {{ getMonthLabel() }}
   </v-card-title>
 
   <div class="progress-container ma-5">
-    <v-progress-circular :model-value="progressValue" :rotate="360" :size="200" :width="30" color="primary" />
+    <v-progress-circular
+      :model-value="progressValue"
+      :rotate="360"
+      :size="200"
+      :width="30"
+      color="primary"
+    />
     <div class="progress-hours">
       {{ progressHours }} / {{ hours }}h
     </div>
@@ -12,9 +18,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useSaveTimeStore } from "../stores/saveTimeStore.js";
-import { useSaveAccountData } from "../stores/saveAccountData.js";
+import {onMounted, ref} from "vue";
+import {useSaveTimeStore} from "../stores/saveTimeStore.js";
+import {useSaveAccountData} from "../stores/saveAccountData.js";
+
 const hours = ref("");
 
 const saveTimeStore = useSaveTimeStore();
@@ -29,6 +36,11 @@ hours.value = data.workingHours * 4;
 onMounted(() => {
   calculateMonthHours();
 });
+
+const getMonthLabel = () => {
+  const options = { month: "long" };
+  return new Date().toLocaleDateString("de-DE", options);
+};
 
 const calculateMonthHours = () => {
   const currentDate = new Date();

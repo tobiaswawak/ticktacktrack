@@ -1,5 +1,5 @@
 <template>
-  <div class="title-container ml-10">
+  <div class="title-container ml-10 py-4">
     <v-icon
       color="primary"
       size="35"

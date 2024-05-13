@@ -44,7 +44,7 @@
             <!-- Profil -->
             <v-card
               class="mr-5"
-              height="78.5%"
+              height="75.3%"
               fluid
               border
             >
