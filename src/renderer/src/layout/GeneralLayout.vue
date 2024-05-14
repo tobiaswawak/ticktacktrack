@@ -15,15 +15,21 @@ import { useSaveAccountData } from "../stores/saveAccountData.js";
 import {useRouter} from "vue-router";
 
 const saveAccountData = useSaveAccountData();
+
 const router = useRouter();
 
-
 onMounted(() => {
-  console.log(saveAccountData.accountData)
-  if (saveAccountData.accountData) {
-    router.push({name:"account"})
+  const data = saveAccountData.accountData;
+  if (Object.keys(saveAccountData.accountData).length === 0) {
+    if(data.firstName !== null && data.lastName !== null && data.jobTitle !== null && data.workingHours !== null) {
+      router.push({name: "account"})
+    }
   }
+
+
+
 });
+
 </script>
 
 <style lang="css">

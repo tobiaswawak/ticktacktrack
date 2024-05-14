@@ -8,5 +8,5 @@ export const useSaveAccountData = defineStore("accountData", {
       accountData:{firstName: null, lastName:null, jobTitle:null, workingHours:null, image:null},
     };
   },
-  persist: false,
+  persist: true,
 });

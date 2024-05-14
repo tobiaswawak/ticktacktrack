@@ -61,6 +61,12 @@ job.value = data.jobTitle;
 hours.value = data.workingHours + " Stunden";
 image.value = data.image;
 
+const convertIMG = (byteArray) => {
+  const uint8Array = new Uint8Array(Object.values(byteArray));
+  const blob = new Blob([uint8Array]);
+  return URL.createObjectURL(blob);
+}
+
 </script>
 
 <style scoped>

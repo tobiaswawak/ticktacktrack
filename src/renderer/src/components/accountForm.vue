@@ -1,42 +1,26 @@
 <template>
-  <div class="ma-5 ml-7 mt-6">
-    <v-avatar size="75">
-      <v-img
+  <div class="ma-5 ml-8 mr-8 mt-10">
+    <v-row
+      v-if="userdata.image"
+    >
+      <v-avatar size="80">
+        <v-img :src="convertIMG(userdata.image)" />
+      </v-avatar>
+      <v-btn
         v-if="userdata.image !== null"
-        :src="userdata.image"
+        icon="mdi-trash-can"
+        border
+        @click="deleteProfileImg()"
+        class="ml-6"
       />
-
-      <v-img
-        v-else
-        src="/src/images/default_Avatar.jpg"
-      />
-    </v-avatar>
-    <v-btn
-      v-if="userdata.image !== null"
-      icon="mdi-trash-can"
-      border
-      @click="deleteProfileImg()"
-      class="ml-6"
-    />
+    </v-row>
     <v-file-input
       v-else
       v-model="image"
       accept="image/*"
       color="primary"
       variant="outlined"
-      label="Profilbild auswählen"
-      class="mt-6"
-    >
-      <template #append>
-        <v-btn
-          border
-          @click="saveImg()"
-          class="mr-3"
-        >
-          <v-icon>mdi-content-save</v-icon>
-        </v-btn>
-      </template>
-    </v-file-input>
+    />
   </div>
 
   <v-form
@@ -54,7 +38,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-account-edit-outline"
+          prepend-icon="mdi-rename-outline"
         />
       </v-col>
 
@@ -106,7 +90,7 @@
         <v-btn
           border
           @click="saveUserData"
-          color="primary"
+          :loading="loadingPic"
         >
           Speichern
         </v-btn>
@@ -117,13 +101,15 @@
 
 
 <script setup>
-import { onMounted, ref } from "vue";
-import { useSaveAccountData } from "../stores/saveAccountData.js";
+import {onMounted, ref} from "vue";
+import {useSaveAccountData} from "../stores/saveAccountData.js";
 
 const saveAccountData = useSaveAccountData();
 const form = ref(null);
 let userdata = ref({})
 let image = ref(null)
+let loadingPic = ref(false)
+
 const rules = [
   value => {
     if (value) return true;
@@ -131,7 +117,12 @@ const rules = [
   },
 ];
 onMounted(() => {
-  userdata.value = saveAccountData.accountData;
+  console.log(saveAccountData.accountData)
+  if (!userdata.value) {
+    userdata.value = {firstName: null, lastName: null, jobTitle: null, workingHours: null, image: []}
+  } else {
+    userdata.value = saveAccountData.accountData;
+  }
 });
 
 const deleteProfileImg = () => {
@@ -140,11 +131,47 @@ const deleteProfileImg = () => {
 
 const saveUserData = () => {
   saveAccountData.accountData = userdata.value
+  console.log(saveAccountData.accountData)
+  saveImg()
 }
 
-const saveImg = () => {
-  userdata.value.image = URL.createObjectURL(image.value)
-  image.value = null
+const saveImg = async () => {
+  loadingPic.value=true
+  let img = []
+  await fileToByteArray(image.value)
+    .then(byteArray => {
+      img = byteArray
+      console.log("Byte-Array:", byteArray);
+    })
+    .catch(error => {
+      console.error("Fehler:", error);
+    });
+  saveAccountData.accountData.image = img
+  loadingPic.value=false
+}
+
+const fileToByteArray = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const arrayBuffer = reader.result;
+      const byteArray = new Uint8Array(arrayBuffer);
+      resolve(byteArray);
+    };
+
+    reader.onerror = () => {
+      reject(new Error("Fehler beim Lesen der Datei"));
+    };
+
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+const convertIMG = (byteArray) => {
+  const uint8Array = new Uint8Array(Object.values(byteArray));
+  const blob = new Blob([uint8Array]);
+  return URL.createObjectURL(blob);
 }
 
 
