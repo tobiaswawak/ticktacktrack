@@ -2,6 +2,7 @@
   <v-card-title class="text-h5 my-2">
     Meine Woche - {{ getWeekLabel() }}
   </v-card-title>
+  <v-divider />
 
   <div class="progress-container ma-5">
     <v-progress-circular

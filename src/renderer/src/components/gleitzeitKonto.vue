@@ -7,7 +7,7 @@
       mdi-poll
     </v-icon>
 
-    <v-card-title class="text-h5 my-2 ml-3">
+    <v-card-title class="text-h5 my-2 ml-3 bold">
       Gleitzeitkonto
     </v-card-title>
 

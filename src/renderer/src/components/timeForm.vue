@@ -135,43 +135,43 @@ const rules = [
 
 const saveTime = async () => {
   try {
-  const valid = await form.value.validate();
-  if (valid.valid) {
-    const start = new Date("2000-01-01T" + startTime.value + ":00");
-    const end = new Date("2000-01-01T" + endTime.value + ":00");
-    const workedTimeMinutes = (end - start) / (1000 * 60);
+    const valid = await form.value.validate();
+    if (valid.valid) {
+      const start = new Date("2000-01-01T" + startTime.value + ":00");
+      const end = new Date("2000-01-01T" + endTime.value + ":00");
+      const workedTimeMinutes = (end - start) / (1000 * 60);
 
-    // Ziehe die Pausenzeit ab
-    const pauseMinutes = parseInt(pause.value);
-    const totalWorkedTimeMinutes = workedTimeMinutes - pauseMinutes;
+      // Ziehe die Pausenzeit ab
+      const pauseMinutes = parseInt(pause.value);
+      const totalWorkedTimeMinutes = workedTimeMinutes - pauseMinutes;
 
-    // Arbeitszeit in Stunden umrechnen
-    const totalWorkedTimeHours = totalWorkedTimeMinutes / 60;
+      // Arbeitszeit in Stunden umrechnen
+      const totalWorkedTimeHours = totalWorkedTimeMinutes / 60;
 
-    // Gleitzeit / Überstunden
+      // Gleitzeit / Überstunden
 
-    const standardWorkHoursPerDay = useAccountData.accountData.workingHours / 5; //
-    let overtime = totalWorkedTimeHours - standardWorkHoursPerDay;
-    overtime = overtime.toFixed(2) + " h"
+      const standardWorkHoursPerDay = useAccountData.accountData.workingHours / 5; //
+      let overtime = totalWorkedTimeHours - standardWorkHoursPerDay;
+      overtime = overtime.toFixed(2) + " h"
 
 
-    const input = {
-      date: date.value,
-      startTime: startTime.value,
-      endTime: endTime.value,
-      pause: pause.value + " min",
-      workedTime: totalWorkedTimeHours.toFixed(2) + "h", // Dauer auf zwei Nachkommastellen begrenzen
-      overtime: overtime
-    };
+      const input = {
+        date: date.value,
+        startTime: startTime.value,
+        endTime: endTime.value,
+        pause: pause.value + " min",
+        workedTime: totalWorkedTimeHours.toFixed(2) + "h", // Dauer auf zwei Nachkommastellen begrenzen
+        overtime: overtime
+      };
 
-    const existingEntry = saveTimeStore.timestore.find(item => item.date === input.date);
-    if (existingEntry) {
-      form.value.setErrors({date: "Für dieses Datum wurde bereits ein Eintrag gemacht"});
-    } else {
-      saveTimeStore.timestore.push(input);
+      const existingEntry = saveTimeStore.timestore.find(item => item.date === input.date);
+      if (existingEntry) {
+        form.value.setErrors({date: "Für dieses Datum wurde bereits ein Eintrag gemacht"});
+      } else {
+        saveTimeStore.timestore.push(input);
+      }
     }
-  }
-} catch (error) {
+  } catch (error) {
     window.alert("Für diesen Tag wurde bereits eine Zeit erfasst");
   }
 };

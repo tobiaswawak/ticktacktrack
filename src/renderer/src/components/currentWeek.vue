@@ -3,7 +3,7 @@
     <v-card-title class="text-h5 my-2">
       Wochenübersicht
     </v-card-title>
-
+    <v-divider />
     <v-container>
       <v-row
         v-for="(day, index) in weekDays"

@@ -1,16 +1,30 @@
 <template>
-  <div class="profile-container mt-5 ml-5">
+  <v-card-title
+    class="text-h5 my-2"
+    center
+  >
+    Mein Profil
+  </v-card-title>
+  <v-divider />
+  <div class="profile-container mt-3 ml-5">
     <div class="profile-info d-flex align-center justify-space-around ma-5">
       <v-avatar size="80">
         <v-img :src="image" />
       </v-avatar>
-      <v-card-title v-model="name" class="text-h5" v-if="image !== null">
+      <v-card-title
+        v-model="name"
+        class="text-h5"
+        v-if="image !== null"
+      >
         {{ name }}
       </v-card-title>
     </div>
   </div>
   <div class="title-container ml-13">
-    <v-icon color="primary" size="35">
+    <v-icon
+      color="primary"
+      size="35"
+    >
       mdi-account-tie-outline
     </v-icon>
 
@@ -20,7 +34,10 @@
   </div>
 
   <div class="title-container ml-13">
-    <v-icon color="primary" size="35">
+    <v-icon
+      color="primary"
+      size="35"
+    >
       mdi-briefcase-outline
     </v-icon>
 
