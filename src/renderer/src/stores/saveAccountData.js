@@ -1,3 +1,5 @@
+// In deinem Pinia Store
+
 import { defineStore } from "pinia";
 
 export const useSaveAccountData = defineStore("accountData", {
@@ -6,10 +8,5 @@ export const useSaveAccountData = defineStore("accountData", {
       accountData: JSON.parse(localStorage.getItem("accountData")) || {firstName: null, lastName:null, jobTitle:null, workingHours:null, image:null},
     };
   },
-  actions: {
-    saveData() {
-      localStorage.setItem("accountData", JSON.stringify(this.accountData));
-    },
-  },
-  persist: true,
+  persist: false,
 });

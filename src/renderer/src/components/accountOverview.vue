@@ -59,10 +59,7 @@ const data = saveAccountData.accountData;
 name.value = data.firstName + " " + data.lastName;
 job.value = data.jobTitle;
 hours.value = data.workingHours + " Stunden";
-
- image.value = data.image;
-// image.value = URL.createObjectURL(data.image);
-
+image.value = data.image;
 
 </script>
 

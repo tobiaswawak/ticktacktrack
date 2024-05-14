@@ -4,6 +4,23 @@
     ref="form"
     class="mt-5"
   >
+    <v-avatar
+      class="ma-5 ml-9"
+      size="75"
+    >
+      <!-- Wenn ein Bild vorhanden ist, zeige es an -->
+      <v-img
+        v-if="userdata.image !== null"
+        :src="userdata.image"
+      />
+
+      <!-- Wenn kein Bild vorhanden ist, zeige das Standardbild an -->
+      <v-img
+        v-else
+        src="/src/images/default_Avatar.jpg"
+      />
+    </v-avatar>
+
     <v-row class="mx-5">
       <v-col cols="12">
         <v-file-input
@@ -96,6 +113,7 @@ const saveAccountData = useSaveAccountData();
 const form = ref(null);
 let userdata = ref({});
 let image = ref(null);
+
 const rules = [
   value => {
     if (value) return true;
@@ -103,23 +121,22 @@ const rules = [
   },
 ];
 
+
+
+
 onMounted(() => {
   if (saveAccountData.accountData) {
     userdata.value = { ...saveAccountData.accountData };
-    if (saveAccountData.accountData.image) {
-      // Laden des Bilds, falls vorhanden
-      image.value = saveAccountData.accountData.image;
-    }
   }
 });
 
 const saveUserData = () => {
-  // Speichern der Benutzerdaten im Store
+  // Speichere die Benutzerdaten im Store
   saveAccountData.accountData = { ...userdata.value };
 
-  // Speichern des ausgewählten Bilds im Store
+  // Speichere das ausgewählte Bild im Store
   if (image.value) {
-    saveAccountData.accountData.image = image.value;
+    saveAccountData.accountData.image = URL.createObjectURL(image.value);
   }
 };
 </script>
