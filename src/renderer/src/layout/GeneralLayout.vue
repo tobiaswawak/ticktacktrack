@@ -19,15 +19,14 @@ const saveAccountData = useSaveAccountData();
 const router = useRouter();
 
 onMounted(() => {
+
   const data = saveAccountData.accountData;
-  if (Object.keys(saveAccountData.accountData).length === 0) {
-    if(data.firstName !== null && data.lastName !== null && data.jobTitle !== null && data.workingHours !== null) {
-      router.push({name: "account"})
-    }
+  const { firstName, lastName, jobTitle, workingHours } = data;
+
+  // Prüfen, ob alle erforderlichen Felder einen Wert ungleich null haben
+  if (!firstName && !lastName && !jobTitle && !workingHours) {
+    router.push({ name: "account" });
   }
-
-
-
 });
 
 </script>

@@ -11,7 +11,7 @@
         icon="mdi-trash-can"
         border
         @click="deleteProfileImg()"
-        class="ml-6"
+        class="ml-6 mt-3"
       />
     </v-row>
     <v-file-input
@@ -131,7 +131,6 @@ const deleteProfileImg = () => {
 
 const saveUserData = () => {
   saveAccountData.accountData = userdata.value
-  console.log(saveAccountData.accountData)
   saveImg()
 }
 
