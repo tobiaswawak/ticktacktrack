@@ -21,7 +21,6 @@ const router = useRouter();
 onMounted(() => {
   console.log(saveAccountData.accountData)
   if (saveAccountData.accountData) {
-
     router.push({name:"account"})
   }
 });
