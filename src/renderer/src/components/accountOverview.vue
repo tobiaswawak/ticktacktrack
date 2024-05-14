@@ -9,12 +9,18 @@
   <div class="profile-container mt-3 ml-5">
     <div class="profile-info d-flex align-center justify-space-around ma-5">
       <v-avatar size="80">
-        <v-img :src="image" />
+        <v-img
+          v-if="image !== null"
+          :src="convertIMG(image)"
+        />
+        <v-img
+          v-else
+          src="/src/images/default_Avatar.jpg"
+        />
       </v-avatar>
       <v-card-title
         v-model="name"
         class="text-h5"
-        v-if="image !== null"
       >
         {{ name }}
       </v-card-title>
@@ -56,6 +62,7 @@ const hours = ref("")
 const image = ref("")
 const saveAccountData = useSaveAccountData();
 const data = saveAccountData.accountData;
+console.log(data.firstName + " " + data.lastName)
 name.value = data.firstName + " " + data.lastName;
 job.value = data.jobTitle;
 hours.value = data.workingHours + " Stunden";

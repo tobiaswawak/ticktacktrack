@@ -1,17 +1,39 @@
 <template>
-  <v-navigation-drawer class="border-none ma-2" permanent>
+  <v-navigation-drawer
+    class="border-none ma-2"
+    permanent
+  >
     <v-list>
       <v-list-item title="Tick Tack Track" />
 
-      <v-list-item prepend-icon="mdi-home" title="Home" value="addTime" class="my-5 rounded-lg"
-        @click="selectItem('home')" :variant="getVariant('home')" :class="{ 'active-item': selectedItem === 'home' }" />
+      <v-list-item
+        prepend-icon="mdi-home"
+        title="Home"
+        value="addTime"
+        class="my-5 rounded-lg"
+        @click="selectItem('home')"
+        :variant="getVariant('home')"
+        :class="{ 'active-item': selectedItem === 'home' }"
+      />
 
-      <v-list-item prepend-icon="mdi-timer-plus" title="Zeit erfassen" value="addTime" class="my-5 rounded-lg"
-        @click="selectItem('timeTrack')" :class="{ 'active-item': selectedItem === 'timeTrack' }" />
+      <v-list-item
+        prepend-icon="mdi-timer-plus"
+        title="Zeit erfassen"
+        value="addTime"
+        class="my-5 rounded-lg"
+        @click="selectItem('timeTrack')"
+        :class="{ 'active-item': selectedItem === 'timeTrack' }"
+      />
 
-      <v-list-item prepend-icon="mdi-account" title="Mein Account" value="account" class="rounded-lg"
-        @click="selectItem('account')" :variant="getVariant('account')"
-        :class="{ 'active-item': selectedItem === 'account' }" />
+      <v-list-item
+        prepend-icon="mdi-account"
+        title="Mein Account"
+        value="account"
+        class="rounded-lg"
+        @click="selectItem('account')"
+        :variant="getVariant('account')"
+        :class="{ 'active-item': selectedItem === 'account' }"
+      />
     </v-list>
   </v-navigation-drawer>
 </template>

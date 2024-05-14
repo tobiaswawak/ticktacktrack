@@ -116,6 +116,7 @@ const rules = [
     return "Bitte eintragen";
   },
 ];
+
 onMounted(() => {
   console.log(saveAccountData.accountData)
   if (!userdata.value) {
@@ -136,6 +137,7 @@ const saveUserData = () => {
 
 const saveImg = async () => {
   loadingPic.value=true
+  if (image.value!==null) {
   let img = []
   await fileToByteArray(image.value)
     .then(byteArray => {
@@ -147,6 +149,7 @@ const saveImg = async () => {
     });
   saveAccountData.accountData.image = img
   loadingPic.value=false
+  }
 }
 
 const fileToByteArray = (file) => {
