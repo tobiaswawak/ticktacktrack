@@ -114,6 +114,7 @@ const rules = [
     if (value) return true;
     return "Bitte eintragen";
   },
+  // eslint-disable-next-line no-unused-vars
   value => {
     if (!startTime.value || !endTime.value) return true; // Skip validation if fields are empty
     const start = new Date("2000-01-01T" + startTime.value + ":00");
@@ -123,6 +124,7 @@ const rules = [
     }
     return true;
   },
+  // eslint-disable-next-line no-unused-vars
   value => {
     const start = new Date("2000-01-01T" + startTime.value + ":00");
     const end = new Date("2000-01-01T" + endTime.value + ":00");
@@ -154,7 +156,6 @@ const saveTime = async () => {
       let overtime = totalWorkedTimeHours - standardWorkHoursPerDay;
       overtime = overtime.toFixed(2) + " h"
 
-
       const input = {
         date: date.value,
         startTime: startTime.value,
@@ -184,7 +185,5 @@ const getMaxDate = () => {
 </script>
 
 <style scoped>
-v-form {
-  transition: all 0.3s ease;
-}
+
 </style>

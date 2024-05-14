@@ -1,49 +1,21 @@
 <template>
-  <div class="ma-5 ml-7 mt-6">
-    <v-avatar size="75">
-      <v-img
-        v-if="userdata.image !== null"
-        :src="userdata.image"
-      />
-
-      <v-img
-        v-else
-        src="/src/images/default_Avatar.jpg"
-      />
-    </v-avatar>
-    <v-btn
-      v-if="userdata.image !== null"
-      icon="mdi-trash-can"
-      border
-      @click="deleteProfileImg()"
-      class="ml-6"
-    />
-    <v-file-input
-      v-else
-      v-model="image"
-      accept="image/*"
-      color="primary"
-      variant="outlined"
-      label="Profilbild auswählen"
-      class="mt-6"
-    >
-      <template #append>
-        <v-btn
-          border
-          @click="saveImg()"
-          class="mr-3"
-        >
-          <v-icon>mdi-content-save</v-icon>
-        </v-btn>
-      </template>
-    </v-file-input>
-  </div>
-
   <v-form
     lazy-validation
     ref="form"
     class="mt-5"
   >
+    <v-row class="mx-5">
+      <v-col cols="12">
+        <v-file-input
+          v-model="image"
+          accept="image/*"
+          color="primary"
+          label="Profilbild auswählen"
+          variant="outlined"
+        />
+      </v-col>
+    </v-row>
+
     <v-row class="mx-5">
       <v-col cols="6">
         <v-text-field
@@ -122,37 +94,36 @@ import { useSaveAccountData } from "../stores/saveAccountData.js";
 
 const saveAccountData = useSaveAccountData();
 const form = ref(null);
-let userdata = ref({})
-let image = ref(null)
+let userdata = ref({});
+let image = ref(null);
 const rules = [
   value => {
     if (value) return true;
     return "Bitte eintragen";
   },
 ];
+
 onMounted(() => {
-  userdata.value = saveAccountData.accountData;
+  if (saveAccountData.accountData) {
+    userdata.value = { ...saveAccountData.accountData };
+    if (saveAccountData.accountData.image) {
+      // Laden des Bilds, falls vorhanden
+      image.value = saveAccountData.accountData.image;
+    }
+  }
 });
 
-const deleteProfileImg = () => {
-  saveAccountData.accountData.image = null
-}
-
 const saveUserData = () => {
-  saveAccountData.accountData = userdata.value
-}
+  // Speichern der Benutzerdaten im Store
+  saveAccountData.accountData = { ...userdata.value };
 
-const saveImg = () => {
-  userdata.value.image = URL.createObjectURL(image.value)
-  image.value = null
-}
-
-
-
+  // Speichern des ausgewählten Bilds im Store
+  if (image.value) {
+    saveAccountData.accountData.image = image.value;
+  }
+};
 </script>
 
 <style scoped>
-v-form {
-  transition: all 0.3s ease;
-}
+
 </style>
