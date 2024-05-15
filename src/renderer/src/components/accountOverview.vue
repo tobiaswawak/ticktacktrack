@@ -44,7 +44,7 @@
       color="primary"
       size="35"
     >
-      mdi-briefcase-outline
+      mdi-clock-outline
     </v-icon>
 
     <v-card-title class="text-h6 my-2 ml-3">

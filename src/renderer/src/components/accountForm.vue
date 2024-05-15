@@ -16,6 +16,7 @@
     </v-row>
     <v-file-input
       v-else
+      prepend-icon="mdi-image-edit-outline"
       v-model="image"
       accept="image/*"
       color="primary"
@@ -38,7 +39,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-rename-outline"
+          prepend-icon="mdi-account-edit-outline"
         />
       </v-col>
 
@@ -65,7 +66,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-briefcase-outline"
+          prepend-icon="mdi-account-tie-outline"
         />
       </v-col>
 
@@ -78,6 +79,7 @@
           required
           variant="outlined"
           color="primary"
+          prepend-icon="mdi-clock-outline"
         />
       </v-col>
     </v-row>
