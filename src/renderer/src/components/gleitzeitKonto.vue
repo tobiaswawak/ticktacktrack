@@ -1,9 +1,6 @@
 <template>
   <div class="title-container ml-13 py-4">
-    <v-icon
-      color="primary"
-      size="35"
-    >
+    <v-icon color="primary" size="35">
       mdi-poll
     </v-icon>
 
@@ -12,7 +9,9 @@
     </v-card-title>
 
     <div class="hours-container mr-8">
+      <p class="font-weight-bold">
       <p>{{ totalOvertime }} Stunden</p>
+      </p>
     </div>
   </div>
 </template>
@@ -47,6 +46,7 @@ const calculateTotalOvertime = () => {
 }
 
 .hours-container {
-  margin-left: auto; /* Bewegt die Stunden nach rechts */
+  margin-left: auto;
+  /* Bewegt die Stunden nach rechts */
 }
 </style>

@@ -5,10 +5,7 @@
     </v-card-title>
     <v-divider />
     <v-container>
-      <v-row
-        v-for="(day, index) in weekDays"
-        :key="index"
-      >
+      <v-row v-for="(day, index) in weekDays" :key="index">
         <v-container class="width">
           <p class="font-weight-bold">
             {{ getDayLabelName(day) }}
@@ -19,12 +16,11 @@
         </v-container>
 
         <v-container class="width vertical-center spacer">
+          <p class="font-weight-bold">
           <p>{{ getFormattedHours(day.hours) }}</p>
+          </p>
         </v-container>
-        <v-divider
-          v-if="!isFriday(day)"
-          class="mx-3"
-        />
+        <v-divider v-if="!isFriday(day)" class="mx-3" />
       </v-row>
     </v-container>
   </v-card>
@@ -105,5 +101,4 @@ const getFormattedHours = (hours) => {
 .spacer {
   height: 80px;
 }
-
 </style>
