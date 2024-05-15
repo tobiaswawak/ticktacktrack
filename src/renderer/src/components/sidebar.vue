@@ -3,14 +3,17 @@
     class="border-none ma-2"
     permanent
   >
+    <img
+      src="/src/images/logo-final.png"
+      width="180px"
+      class="mt-8  mb-1 ml-1"
+    >
     <v-list>
-      <v-list-item title="Tick Tack Track" />
-
       <v-list-item
         prepend-icon="mdi-home"
         title="Home"
         value="addTime"
-        class="my-5 rounded-lg"
+        class="my-5 ml-2 rounded-lg"
         @click="selectItem('home')"
         :variant="getVariant('home')"
         :class="{ 'active-item': selectedItem === 'home' }"
@@ -20,7 +23,7 @@
         prepend-icon="mdi-timer-plus"
         title="Zeit erfassen"
         value="addTime"
-        class="my-5 rounded-lg"
+        class="my-5  ml-2 rounded-lg"
         @click="selectItem('timeTrack')"
         :class="{ 'active-item': selectedItem === 'timeTrack' }"
       />
@@ -29,7 +32,7 @@
         prepend-icon="mdi-account"
         title="Mein Account"
         value="account"
-        class="rounded-lg"
+        class="rounded-lg  ml-2 "
         @click="selectItem('account')"
         :variant="getVariant('account')"
         :class="{ 'active-item': selectedItem === 'account' }"
