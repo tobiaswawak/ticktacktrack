@@ -1,4 +1,19 @@
 <template>
+  <v-card
+    class="ma-5 pa-3"
+    border
+    color="primary"
+    v-if="checkInfo(userdata)"
+  >
+    <v-row class="info">
+      <v-icon class="ma-5">
+        mdi-information-outline
+      </v-icon>
+      <v-card-text>
+        Um die Anwendung nutzen zu können tragen Sie bitte ihre Daten ein
+      </v-card-text>
+    </v-row>
+  </v-card>
   <div class="ma-5 ml-8 mr-8 mt-10">
     <v-row
       v-if="userdata.image"
@@ -199,10 +214,19 @@ const convertIMG = (byteArray) => {
   return URL.createObjectURL(blob);
 }
 
+const checkInfo = (data) => {
+  return data.firstName === null || data.lastName === null || data.jobTitle === null || data.workingHours === null;
+}
+
 </script>
 
 <style scoped>
 v-form {
   transition: all 0.3s ease;
+}
+
+.info {
+  display: flex;
+  align-items: center;
 }
 </style>
