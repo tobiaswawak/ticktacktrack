@@ -1,6 +1,6 @@
 <template>
   <v-card-title class="text-h5 my-2">
-    Mein Monat - {{ getMonthLabel() }}
+    Mein Monat
   </v-card-title>
   <v-divider />
 
@@ -11,7 +11,13 @@
       :size="200"
       :width="30"
       color="primary"
-    />
+    >
+      <v-card-text
+        class="textstyle"
+      >
+        {{ getMonthLabel() }}
+      </v-card-text>
+    </v-progress-circular>
     <div class="progress-hours">
       {{ progressHours }} / {{ hours }}h
     </div>
@@ -75,5 +81,10 @@ const calculateMonthHours = () => {
   text-align: center;
   font-size: 45px;
   justify-content: center;
+}
+
+.textstyle {
+  font-weight: bold;
+  font-size: 15pt;
 }
 </style>

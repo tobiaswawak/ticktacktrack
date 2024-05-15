@@ -1,6 +1,6 @@
 <template>
   <v-card-title class="text-h5 my-2">
-    Meine Woche - {{ getWeekLabel() }}
+    Meine Woche
   </v-card-title>
   <v-divider />
 
@@ -11,7 +11,13 @@
       :size="200"
       :width="30"
       color="primary"
-    />
+    >
+      <v-card-text
+        class="textstyle"
+      >
+        {{ getWeekLabel() }}
+      </v-card-text>
+    </v-progress-circular>
     <div class="progress-hours">
       {{ progressHours }} / {{ hours }}h
     </div>
@@ -79,5 +85,10 @@ const calculateWeekHours = () => {
   text-align: center;
   font-size: 45px;
   justify-content: center;
+}
+
+.textstyle {
+  font-weight: bold;
+  font-size: 15pt;
 }
 </style>
