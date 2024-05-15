@@ -26,7 +26,7 @@
       </v-avatar>
       <v-btn
         v-if="userdata.image !== null"
-
+        icon="mdi-trash-can"
         border
         @click="deleteProfileImg()"
         class="ml-6 mt-5"
@@ -61,7 +61,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-rename-outline"
+          prepend-icon="mdi-account-edit-outline"
         />
       </v-col>
 
@@ -88,7 +88,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-briefcase-outline"
+          prepend-icon="mdi-account-tie-outline"
         />
       </v-col>
 
@@ -101,6 +101,7 @@
           required
           variant="outlined"
           color="primary"
+          prepend-icon="mdi-clock-outline"
         />
       </v-col>
     </v-row>
@@ -111,6 +112,7 @@
     >
       <v-col cols="auto">
         <v-btn
+          border
           @click="saveUserData"
           :loading="loadingPic"
           color="primary"
@@ -161,7 +163,6 @@ const saveUserData = () => {
 
 const saveImg = async () => {
   loadingPic.value=true
-
   if (image.value!==null) {
 
     // Größe prüfen
