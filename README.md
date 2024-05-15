@@ -1,6 +1,6 @@
-# test
+# Tick Tack Track
 
-An Electron application with Vue
+ON23-2:P1 Projekt von Tobias Wawak, Katharina Rose, Loana Rudy, Celina Maxhuni, Paula Neuman
 
 ## Recommended IDE Setup
 
@@ -12,12 +12,6 @@ An Electron application with Vue
 
 ```bash
 $ npm install
-```
-
-### Development
-
-```bash
-$ npm run dev
 ```
 
 ### Build

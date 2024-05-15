@@ -26,8 +26,7 @@
       </v-avatar>
       <v-btn
         v-if="userdata.image !== null"
-        icon="mdi-trash-can"
-        border
+
         @click="deleteProfileImg()"
         class="ml-6 mt-5"
         variant="outlined"
