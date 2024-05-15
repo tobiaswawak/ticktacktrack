@@ -91,6 +91,7 @@
           border
           @click="saveUserData"
           :loading="loadingPic"
+          color="primary"
         >
           Speichern
         </v-btn>
@@ -118,7 +119,7 @@ const rules = [
 ];
 
 onMounted(() => {
-  console.log(saveAccountData.accountData)
+  // console.log(saveAccountData.accountData)
   if (!userdata.value) {
     userdata.value = {firstName: null, lastName: null, jobTitle: null, workingHours: null, image: []}
   } else {
@@ -137,19 +138,33 @@ const saveUserData = () => {
 
 const saveImg = async () => {
   loadingPic.value=true
+
   if (image.value!==null) {
-  let img = []
-  await fileToByteArray(image.value)
-    .then(byteArray => {
-      img = byteArray
-      console.log("Byte-Array:", byteArray);
-    })
-    .catch(error => {
-      console.error("Fehler:", error);
-    });
-  saveAccountData.accountData.image = img
-  loadingPic.value=false
+
+    // Größe prüfen
+    const maxSizeInBytes = 320 * 1024; // 500 KB
+
+    if (image.value.size > maxSizeInBytes) {
+      window.alert("Die Dateigröße darf maximal 320 KB betragen.");
+      console.error("File size too large" + image.value.size)
+      loadingPic.value=false
+      return;
+    }
+
+    if (image.value !== saveAccountData.accountData.image){
+    let img = []
+    await fileToByteArray(image.value)
+      .then(byteArray => {
+        img = byteArray
+
+      })
+      .catch(error => {
+        console.error("Fehler:", error);
+      });
+    saveAccountData.accountData.image = img
+    }
   }
+    loadingPic.value=false
 }
 
 const fileToByteArray = (file) => {
@@ -175,7 +190,6 @@ const convertIMG = (byteArray) => {
   const blob = new Blob([uint8Array]);
   return URL.createObjectURL(blob);
 }
-
 
 </script>
 

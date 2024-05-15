@@ -62,7 +62,6 @@ const hours = ref("")
 const image = ref("")
 const saveAccountData = useSaveAccountData();
 const data = saveAccountData.accountData;
-console.log(data.firstName + " " + data.lastName)
 name.value = data.firstName + " " + data.lastName;
 job.value = data.jobTitle;
 hours.value = data.workingHours + " Stunden";
