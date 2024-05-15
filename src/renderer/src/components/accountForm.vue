@@ -37,11 +37,13 @@
     </v-row>
     <v-file-input
       v-else
-      prepend-icon="mdi-image-edit"
+      prepend-icon=""
+      prepend-inner-icon="mdi-image-edit"
       v-model="image"
       accept="image/*"
       color="primary"
       variant="outlined"
+      label="Profilbild hochladen"
     />
   </div>
 
@@ -60,7 +62,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-account-edit-outline"
+          prepend-inner-icon="mdi-account-edit-outline"
         />
       </v-col>
 
@@ -87,7 +89,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-account-tie-outline"
+          prepend-inner-icon="mdi-account-tie-outline"
         />
       </v-col>
 
@@ -100,7 +102,7 @@
           required
           variant="outlined"
           color="primary"
-          prepend-icon="mdi-clock-outline"
+          prepend-inner-icon="mdi-clock-outline"
         />
       </v-col>
     </v-row>
@@ -122,6 +124,11 @@
       </v-col>
     </v-row>
   </v-form>
+  <v-snackbar
+    v-model="showSnackbar"
+    text="Speichern erfolgreich!"
+    color="success"
+  />
 </template>
 
 
@@ -134,6 +141,7 @@ const form = ref(null);
 let userdata = ref({})
 let image = ref(null)
 let loadingPic = ref(false)
+let showSnackbar = ref(false)
 
 const rules = [
   value => {
@@ -158,6 +166,7 @@ const deleteProfileImg = () => {
 const saveUserData = () => {
   saveAccountData.accountData = userdata.value
   saveImg()
+  showSnackbar.value=true;
 }
 
 const saveImg = async () => {
