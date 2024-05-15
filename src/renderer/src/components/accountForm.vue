@@ -3,19 +3,27 @@
     <v-row
       v-if="userdata.image"
     >
-      <v-avatar size="80">
+      <v-avatar
+        size="80"
+        class="ml-2 mb-3"
+      >
         <v-img :src="convertIMG(userdata.image)" />
       </v-avatar>
       <v-btn
         v-if="userdata.image !== null"
-        icon="mdi-trash-can"
+
         border
         @click="deleteProfileImg()"
-        class="ml-6 mt-3"
-      />
+        class="ml-6 mt-5"
+        variant="outlined"
+        color="red"
+      >
+        Reset
+      </v-btn>
     </v-row>
     <v-file-input
       v-else
+      prepend-icon="mdi-image-edit"
       v-model="image"
       accept="image/*"
       color="primary"
@@ -88,10 +96,10 @@
     >
       <v-col cols="auto">
         <v-btn
-          border
           @click="saveUserData"
           :loading="loadingPic"
           color="primary"
+          prepend-icon="mdi-content-save"
         >
           Speichern
         </v-btn>
