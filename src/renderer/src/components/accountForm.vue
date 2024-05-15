@@ -10,7 +10,7 @@
         mdi-information-outline
       </v-icon>
       <v-card-text>
-        Um die Anwendung nutzen zu können tragen Sie bitte ihre Daten ein
+        Um die Anwendung nutzen zu können, tragen Sie bitte ihre Daten ein
       </v-card-text>
     </v-row>
   </v-card>
