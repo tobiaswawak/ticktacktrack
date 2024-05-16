@@ -38,7 +38,7 @@
     <v-file-input
       v-else
       prepend-icon=""
-      prepend-inner-icon="mdi-image-edit"
+      prepend-inner-icon="mdi-image-edit-outline"
       v-model="image"
       accept="image/*"
       color="primary"
