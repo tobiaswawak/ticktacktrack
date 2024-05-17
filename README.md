@@ -4,10 +4,6 @@ ON23-2: P1 Projekt von Tobias Wawak, Katharina Rose, Loana Rudy, Celina Maxhuni,
 
 ## Project Setup
 
-```bash
-$ npm install
-```
-
 ### 1. Install
 
 ```bash
